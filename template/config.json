@@ -1,0 +1,14 @@
+{
+    "user": {
+        "name": "",
+        "password": ""
+    },
+    "paths": {
+        "groups": "/",
+        "timetables": "/",
+        "teachersTimetables": "/",
+        "names": "/",
+        "order": "/"
+    },
+    "baseUrl": "http://localhost:5984/database"
+}
