@@ -45,7 +45,10 @@ async function fetchOrder() {
 async function fetchNames() {
     const result = await fetchFromDb(namesFullPath);
     const data = result.data;
-    return data;
+    const iterableData = Object.entries(data);
+    const sortedData = iterableData.sort((fst, snd) => fst[1].localeCompare(snd[1]));
+
+    return sortedData;
 }
 
 async function fetchGroups() {

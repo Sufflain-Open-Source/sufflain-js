@@ -1,7 +1,8 @@
 <script>
     import { fetchGroups, fetchNames, fetchTimetables } from './data/couch';
     import LoadingIndicator from './components/LoadingIndicator.svelte';
-    import { onMount } from 'svelte';
+    import UserSelectForm from './components/UserSelectForm.svelte';
+    import { onMount }  from 'svelte';
     import { Router } from '@roxi/routify';
     import { routes } from '../.routify/routes';
 
@@ -17,5 +18,5 @@
 {#if !groups && !names}
     <LoadingIndicator></LoadingIndicator>
 {:else}
-    
+   <UserSelectForm { names } { groups }></UserSelectForm> 
 {/if}
