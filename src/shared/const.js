@@ -15,46 +15,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-const groupIdKey = 'gid';
-const userNameKey = 'una';
-const storage = window.localStorage;
+const UserType = Object.freeze({
+    student: 1,
+    teacher: 2
+});
 
-function getGroup() {
-    return get(groupIdKey);
-}
-
-function getName() {
-    return get(userNameKey);
-}
-
-function get(key) {
-    return storage.getItem(key);
-}
-
-function setGroup(entity) {
-    set(groupIdKey, entity);
-}
-
-function setName(entity) {
-    set(userNameKey, entity);
-}
-
-function set(key, val) {
-    storage.setItem(key, val);
-}
-
-function removeGroup() {
-    remove(groupIdKey);
-}
-
-function removeName() {
-    remove(userNameKey);
-}
-
-function remove(key) {
-    storage.removeItem(key);
-}
-
-export {
-    getGroup, setGroup, removeGroup, getName, setName, removeName
-}
+export { UserType };

@@ -15,46 +15,19 @@ Copyright (C) 2022 Timofey Chuchkanov
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-const groupIdKey = 'gid';
-const userNameKey = 'una';
-const storage = window.localStorage;
+import { setName, setGroup, removeName, removeGroup } from '../data/local.js';
+import { UserType } from '../shared/const.js';
 
-function getGroup() {
-    return get(groupIdKey);
+function saveEntity({ checkedUserType, entity }) {
+    if (entity.trim() != '') {
+        if (checkedUserType == UserType.student) {
+            setGroup(entity);
+            removeName();
+        } else {
+            setName(entity);
+            removeGroup();
+        }
+    }
 }
 
-function getName() {
-    return get(userNameKey);
-}
-
-function get(key) {
-    return storage.getItem(key);
-}
-
-function setGroup(entity) {
-    set(groupIdKey, entity);
-}
-
-function setName(entity) {
-    set(userNameKey, entity);
-}
-
-function set(key, val) {
-    storage.setItem(key, val);
-}
-
-function removeGroup() {
-    remove(groupIdKey);
-}
-
-function removeName() {
-    remove(userNameKey);
-}
-
-function remove(key) {
-    storage.removeItem(key);
-}
-
-export {
-    getGroup, setGroup, removeGroup, getName, setName, removeName
-}
+export { saveEntity };
