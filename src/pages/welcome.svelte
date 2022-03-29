@@ -21,6 +21,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import UserSelectForm from '../components/UserSelectForm.svelte';
     import { saveEntity } from '../util/entity_operations.js';
     import { onMount }  from 'svelte';
+    import { goto } from '@roxi/routify';
 
     let detail;
     let groups;
@@ -44,5 +45,5 @@ Copyright (C) 2022 Timofey Chuchkanov
     <LoadingIndicator></LoadingIndicator>
 {:else}
     <UserSelectForm on:userSelect={ extractEventDetail } { names } { groups }></UserSelectForm> 
-    <button on:click={ saveSelectedEntity }>Продолжить</button>
+    <button on:click={ () => { saveSelectedEntity(); $goto('/timetables'); } }>Продолжить</button>
 {/if}
