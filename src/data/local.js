@@ -16,7 +16,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 */
 
 const groupIdKey = 'gid';
-const userNameKey = 'una';
+const userNameKey = 'tid';
 const storage = window.localStorage;
 
 function getGroup() {
