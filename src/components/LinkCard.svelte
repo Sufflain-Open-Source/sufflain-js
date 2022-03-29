@@ -16,13 +16,8 @@ Copyright (C) 2022 Timofey Chuchkanov
 -->
 
 <script>
-    import WelcomePage from './pages/welcome.svelte';
-    import { getGroup, getName } from './data/local.js';
-    import { Router } from '@roxi/routify';
-    import { routes } from '../.routify/routes';
-
-    const group = getGroup();
-    const name = getName();
+    export let link;
+    export let title;
 </script>
 
-<Router { routes } />
+<a class="linkCard" href={ link }>{ title }</a>

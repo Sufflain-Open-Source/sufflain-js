@@ -16,13 +16,15 @@ Copyright (C) 2022 Timofey Chuchkanov
 -->
 
 <script>
-    import WelcomePage from './pages/welcome.svelte';
-    import { getGroup, getName } from './data/local.js';
-    import { Router } from '@roxi/routify';
-    import { routes } from '../.routify/routes';
+    import { getGroup, getName } from '../data/local.js';
+    import { redirect } from '@roxi/routify';
 
     const group = getGroup();
     const name = getName();
+
+    if (!group && !name) {
+        $redirect('/welcome');
+    }
 </script>
 
-<Router { routes } />
+<slot></slot>

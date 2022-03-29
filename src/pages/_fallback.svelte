@@ -15,14 +15,4 @@ Copyright (C) 2022 Timofey Chuchkanov
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-<script>
-    import WelcomePage from './pages/welcome.svelte';
-    import { getGroup, getName } from './data/local.js';
-    import { Router } from '@roxi/routify';
-    import { routes } from '../.routify/routes';
-
-    const group = getGroup();
-    const name = getName();
-</script>
-
-<Router { routes } />
+<h1>Страница не найдена</h1>
