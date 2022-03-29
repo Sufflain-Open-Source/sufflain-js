@@ -1,4 +1,8 @@
 <!-- 
+    We use this file—a top-level _layout.svelte—as a page guard.
+    It redirects to the welcome page if the id is not saved by a user.
+    Otherwise, it redirects the welcome page to the timetables page.
+
 Copyright (C) 2022 Timofey Chuchkanov
 
     This program is free software: you can redistribute it and/or modify
