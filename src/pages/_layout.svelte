@@ -17,7 +17,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <script>
     import { getGroup, getName } from '../data/local.js';
-    import { redirect } from '@roxi/routify';
+    import { redirect, route } from '@roxi/routify';
 
     const group = getGroup();
     const name = getName();
@@ -25,6 +25,11 @@ Copyright (C) 2022 Timofey Chuchkanov
     if (!group && !name) {
         $redirect('/welcome');
     }
+
+    if (typeof group == 'string' || typeof name == 'string') {
+        if ($route.shortPath == '/welcome')
+            $redirect('/timetables');
+    } 
 </script>
 
 <slot></slot>
