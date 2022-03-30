@@ -26,6 +26,10 @@ Copyright (C) 2022 Timofey Chuchkanov
     const group = getGroup();
     const name = getName();
 
+    // We need to clean cached page content to prevent from going back to the welcome page if
+    // the user has saved the id.
+    window.addEventListener('pageshow', event => { if (event.persisted) window.location.reload() });
+
     if (!group && !name) {
         $redirect('/welcome');
     }
