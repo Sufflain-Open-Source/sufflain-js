@@ -15,7 +15,7 @@
     along with this program.  If not, see <https:www.gnu.org/licenses/>.
  */
 
-import { user, paths, baseUrl } from '../config.json';
+import { user, paths, baseUrl } from '../config.js';
 
 const buildFullUrl = (path) => `${ baseUrl + path }/`;
 const groupsFullPath = buildFullUrl(paths.groups);
@@ -58,30 +58,10 @@ async function fetchGroups() {
 }
 
 async function fetchFromDb(fullPath) {
-    const credentials = btoa(`${ user.name }:${ user.password }`);
-    const headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', `Basic ${ credentials }`);
-
-    const response = await fetch(fullPath, {
-            method: 'GET',
-            credentials: 'include',
-            headers
-    });
-
+    const response = await fetch(fullPath);
     const json = await response.json();
-    const cleanJson = removeInternalFields(json);
 
-    return cleanJson;
-}
-
-// removeInternalFields: -> Object Object
-// Remove _rev and _id fields
-function removeInternalFields(obj) {
-    const { _rev, _id, ...cleanData } = obj;
-
-    return cleanData;
+    return json;
 }
 
 export {

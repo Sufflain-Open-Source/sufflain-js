@@ -2,5 +2,6 @@ node_modules
 .routify
 .history
 dist
-src/config.json
 tags
+api-config.js
+cli-config.js
