@@ -20,26 +20,20 @@ import config from '../../cli-config.js';
 const buildFullUrl = (path) => `${ config.baseUrl + path }/`;
 const groupsFullPath = buildFullUrl(config.paths.groups);
 const namesFullPath = buildFullUrl(config.paths.names);
-const timetablesFullPath = buildFullUrl(config.paths.timetables);
-const teachersTimetablesFullPath = buildFullUrl(config.paths.teachersTimetables);
-const orderFullPath = buildFullUrl(config.paths.order);
+const timetablesFullPath = buildFullUrl(config.paths.timetable);
+const teacherTimetablesFullPath = buildFullUrl(config.paths.teacherTimetable);
+const orderFullPath = buildFullUrl(config.paths.postsOrder);
 
-async function fetchTeachersTimetables() {
-    const response = await fetchFromDb(teachersTimetablesFullPath);
-
-    return removeInternalFields(response);
+async function fetchTeacherTimetables(tid) {
+    return await fetchFromDb(teacherTimetablesFullPath + tid);
 }
 
-async function fetchTimetables() {
-    const response = await fetchFromDb(timetablesFullPath);
-
-    return removeInternalFields(response);
+async function fetchTimetables(gid) {
+    return await fetchFromDb(timetablesFullPath + gid);
 }
 
 async function fetchOrder() {
-    const resonse = await fetchFromDb(orderFullPath);
-
-    return removeInternalFields(resonse);
+    return await fetchFromDb(orderFullPath);
 }
 
 async function fetchNames() {
@@ -59,12 +53,18 @@ async function fetchGroups() {
 }
 
 async function fetchFromDb(fullPath) {
-    const response = await fetch(fullPath);
+    const response = await fetch(fullPath, {
+        type: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Accept': 'application/json' 
+        }
+    });
     const json = await response.json();
 
     return json;
 }
 
 export {
-    fetchGroups, fetchNames, fetchOrder, fetchTeachersTimetables, fetchTimetables
+    fetchGroups, fetchNames, fetchOrder, fetchTeacherTimetables, fetchTimetables
 };

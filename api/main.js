@@ -17,7 +17,6 @@
 
 import cors from 'cors';
 import config from '../api-config.js';
-import utf8 from 'utf8';
 import express from 'express';
 import { Buffer } from 'buffer';
 import fetch from 'node-fetch';
@@ -35,27 +34,28 @@ app.use(cors());
 
 app.get('/teacher-timetable/:tid', async (req, res) => {
     const teacherTimetable = await fetchById(req.params.tid, teachersTimetablesUrl);
-    res.send(teacherTimetable);
+    res.status(200).send(teacherTimetable);
 });
 
 app.get('/timetable/:gid', async (req, res) => {
-    const groupTimetable = await fetchById(utf8.decode(req.params.gid), timetablesUrl);
-    res.send(groupTimetable);
+    const groupTimetable = await fetchById(req.params.gid, timetablesUrl);
+    console.log(groupTimetable)
+    res.status(200).send(groupTimetable);
 });
 
 app.get('/groups', async (req, res) => {
     const groups = await fetchFromDb(groupsUrl);
-    res.send(groups);
+    res.status(200).send(groups);
 });
 
 app.get('/names', async (req, res) => {
     const names = await fetchFromDb(namesUrl);
-    res.send(names);
+    res.status(200).send(names);
 });
 
 app.get('/posts-order', async (req, res) => {
     const order = await fetchFromDb(orderUrl);
-    res.send(order);
+    res.status(200).send(order);
 });
 
 app.listen(port, () => console.log(`started server at http://localhost:${ port }`));

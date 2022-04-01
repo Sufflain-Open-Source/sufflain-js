@@ -16,7 +16,47 @@ Copyright (C) 2022 Timofey Chuchkanov
 -->
 
 <script>
-    import PageMetaTitle from "../../components/PageMetaTitle.svelte";
+    import PageMetaTitle from '../../components/PageMetaTitle.svelte';
+    import { fetchTimetables, fetchOrder, fetchTeacherTimetables } from '../../data/couch.js';
+    import { getGroup, getName } from '../../data/local.js';
+    import LinkCard from '../../components/LinkCard.svelte';
+    import { url } from '@roxi/routify';
+    import { onMount } from 'svelte';
+    
+    const name = getName();
+    const group = getGroup();
+
+    let timetables;
+    let sortedTimetables;
+    let postsOrder;
+
+    onMount(async () => {
+        timetables = Object.entries(typeof group == 'string' ? await fetchTimetables(group) : await fetchTeacherTimetables(name));
+        postsOrder = await fetchOrder();
+
+        sortedTimetables = sortTimetablesByTimePosted(timetables, postsOrder);
+    });
+
+    function sortTimetablesByTimePosted(timetables, postsOrder) {
+        return timetables.sort((first, second) => {
+            const firstTimetableOrder = getTimetableOrderByHash(first, postsOrder);
+            const secondTimetableOrder = getTimetableOrderByHash(second, postsOrder);
+
+            return firstTimetableOrder - secondTimetableOrder; 
+        });
+    }
+
+    function getTimetableOrderByHash(timetable, postsOrder) {
+        return postsOrder[timetable[0]];
+    }
 </script>
 
 <PageMetaTitle title='Sufflain | Расписание занятий' />
+
+{#if sortedTimetables}
+    <ol>
+        {#each sortedTimetables as timetable}
+            <li><LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/></li>
+        {/each}
+    </ol>
+{/if}
