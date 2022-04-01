@@ -15,6 +15,7 @@
     along with this program.  If not, see <https:www.gnu.org/licenses/>.
  */
 
+import cors from 'cors';
 import config from '../api-config.js';
 import utf8 from 'utf8';
 import express from 'express';
@@ -29,6 +30,8 @@ const groupsUrl = config.baseUrl + config.paths.groups;
 
 const port = 4870;
 const app = express();
+
+app.use(cors());
 
 app.get('/teacher-timetable/:tid', async (req, res) => {
     const teacherTimetable = await fetchById(req.params.tid, teachersTimetablesUrl);

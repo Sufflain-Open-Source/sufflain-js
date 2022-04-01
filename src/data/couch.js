@@ -15,14 +15,14 @@
     along with this program.  If not, see <https:www.gnu.org/licenses/>.
  */
 
-import { user, paths, baseUrl } from '../config.js';
+import config from '../../cli-config.js';
 
-const buildFullUrl = (path) => `${ baseUrl + path }/`;
-const groupsFullPath = buildFullUrl(paths.groups);
-const namesFullPath = buildFullUrl(paths.names);
-const timetablesFullPath = buildFullUrl(paths.timetables);
-const teachersTimetablesFullPath = buildFullUrl(paths.teachersTimetables);
-const orderFullPath = buildFullUrl(paths.order);
+const buildFullUrl = (path) => `${ config.baseUrl + path }/`;
+const groupsFullPath = buildFullUrl(config.paths.groups);
+const namesFullPath = buildFullUrl(config.paths.names);
+const timetablesFullPath = buildFullUrl(config.paths.timetables);
+const teachersTimetablesFullPath = buildFullUrl(config.paths.teachersTimetables);
+const orderFullPath = buildFullUrl(config.paths.order);
 
 async function fetchTeachersTimetables() {
     const response = await fetchFromDb(teachersTimetablesFullPath);
@@ -54,6 +54,7 @@ async function fetchNames() {
 async function fetchGroups() {
     const result = await fetchFromDb(groupsFullPath);
     const data = result.data;
+
     return data;
 }
 

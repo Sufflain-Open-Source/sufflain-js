@@ -4,10 +4,9 @@
     "private": true,
     "scripts": {
         "apimon": "nodemon --exec babel-node api/main.js",
-        "dev": "run-p dev:*",
+        "dev": "run-p dev:* apimon",
         "dev:routify": "routify",
         "dev:vite": "vite",
-        "dev:api": "node api/main.js",
         "preview": "vite preview",
         "build": "run-s build:*",
         "build:routify": "routify -b",
@@ -29,6 +28,7 @@
         "vite": "^2.7.10"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "express": "^4.17.3",
         "node-fetch": "^3.2.3",
         "svelte-async-readable": "^4.0.2",
