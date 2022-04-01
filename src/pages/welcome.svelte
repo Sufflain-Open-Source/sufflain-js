@@ -19,6 +19,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { fetchGroups, fetchNames } from '../data/couch';
     import LoadingIndicator from '../components/LoadingIndicator.svelte';
     import UserSelectForm from '../components/UserSelectForm.svelte';
+    import PageMetaTitle from '../components/PageMetaTitle.svelte';
     import { saveEntity } from '../util/entity_operations.js';
     import { onMount }  from 'svelte';
     import { goto } from '@roxi/routify';
@@ -40,6 +41,8 @@ Copyright (C) 2022 Timofey Chuchkanov
         detail && saveEntity(detail);
     }
 </script>
+
+<PageMetaTitle title='Sufflain | Добро пожаловать' />
 
 {#if !groups && !names}
     <LoadingIndicator></LoadingIndicator>

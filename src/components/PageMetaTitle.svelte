@@ -16,7 +16,9 @@ Copyright (C) 2022 Timofey Chuchkanov
 -->
 
 <script>
-    import PageMetaTitle from "../../components/PageMetaTitle.svelte";
-</script>
+    import { metatags } from '@roxi/routify';
 
-<PageMetaTitle title='Sufflain | Расписание занятий' />
+    export let title = 'App';
+
+    metatags.title = title;
+</script>

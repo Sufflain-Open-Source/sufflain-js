@@ -28,16 +28,24 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // We need to clean cached page content to prevent from going back to the welcome page if
     // the user has saved the id.
-    window.addEventListener('pageshow', event => { if (event.persisted) window.location.reload() });
+    window.onpopstate = function () { 
+        if (window.location.pathname == '/welcome') {
+            window.location.replace('/timetables') 
+        }
+    };
 
     if (!group && !name) {
         $redirect('/welcome');
     }
 
-    if (typeof group == 'string' || typeof name == 'string') {
-        if ($route.shortPath == '/welcome')
-            $redirect('/timetables');
-    } 
+    if (isRedirectFromWelcomePageNeeded())
+        $redirect('/timetables');
+
+    function isRedirectFromWelcomePageNeeded() {
+        if (typeof group == 'string' || typeof name == 'string') {
+            return $route.shortPath == '/welcome'
+        } 
+    }
 </script>
 
 <slot></slot>
