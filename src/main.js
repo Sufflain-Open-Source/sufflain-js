@@ -20,7 +20,7 @@ import {
     requestTimetablesEvent, 
     timetablesLoadedEvent } from './events/custom-window-events';
 import { getGroup, getName } from './data/local.js';
-import { fetchTeacherTimetables, fetchTimetables } from './data/couch.js';
+import { fetchTeacherTimetables, fetchTimetables } from './data/remote.js';
 import { setTimetables } from './data/session.js';
 import "./global.css";
 import HMR from "@roxi/routify/hmr";

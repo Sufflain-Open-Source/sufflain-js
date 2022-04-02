@@ -17,7 +17,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <script>
     import PageMetaTitle from '../../components/PageMetaTitle.svelte';
-    import { fetchOrder } from '../../data/couch.js';
+    import { fetchOrder } from '../../data/remote.js';
     import { getTimetables, } from '../../data/session.js';
     import LinkCard from '../../components/LinkCard.svelte';
     import { requestTimetablesEvent } from '../../events/custom-window-events.js';
