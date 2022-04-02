@@ -17,11 +17,28 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <script>
     import { getTimetables } from '../../data/session.js';
+    import { requestTimetablesEvent } from '../../events/custom-window-events.js';
+    import { onMount } from 'svelte';
 
-    const timetables = getTimetables();
+    let timetables = getTimetables();
     const path = window.location.pathname;
     const timetableHash = path.substring(path.lastIndexOf('/')).replace('/', '');
-    console.log(timetableHash)
-    console.log(timetables)
-    console.log(timetables.find(table => table[0] == timetableHash))
+
+    onMount(() => { 
+        console.log(timetables)
+        if (!timetables) {
+            console.log('dispatching')
+            dispatchEvent(requestTimetablesEvent); 
+        }
+    });
+
+    function setTimetablesToFetched() {
+        timetables = getTimetables();
+        console.log('show')
+        console.log(timetableHash)
+        console.log(timetables)
+        console.log(timetables.find(table => table[0] == timetableHash))
+    }
 </script>
+
+<svelte:window on:timetablesloaded={ setTimetablesToFetched } />

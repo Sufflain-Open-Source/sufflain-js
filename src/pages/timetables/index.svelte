@@ -17,10 +17,10 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <script>
     import PageMetaTitle from '../../components/PageMetaTitle.svelte';
-    import { fetchOrder, fetchTeacherTimetables, fetchTimetables } from '../../data/couch.js';
-    import { getGroup, getName } from '../../data/local.js';
-    import { getTimetables, setTimetables } from '../../data/session.js';
+    import { fetchOrder } from '../../data/couch.js';
+    import { getTimetables, } from '../../data/session.js';
     import LinkCard from '../../components/LinkCard.svelte';
+    import { requestTimetablesEvent } from '../../events/custom-window-events.js';
     import { url } from '@roxi/routify';
     import { onMount } from 'svelte';
     
@@ -29,18 +29,16 @@ Copyright (C) 2022 Timofey Chuchkanov
     let postsOrder;
 
     onMount(async () => {
-        const group = getGroup();
-        const name = getName();
+        dispatchEvent(requestTimetablesEvent);
+    });
 
-        typeof group == 'string' ? 
-            setTimetables(Object.entries(await fetchTimetables(group))) : 
-            setTimetables(Object.entries(await fetchTeacherTimetables(name)))
-
+    async function fetchAndSetData() {
         postsOrder = await fetchOrder();
         timetables = getTimetables();
 
         sortedTimetables = sortTimetablesByTimePosted(timetables, postsOrder);
-    });
+        console.log('fetch and set')
+    }
 
     function sortTimetablesByTimePosted(timetables, postsOrder) {
         return timetables.sort((first, second) => {
@@ -55,6 +53,8 @@ Copyright (C) 2022 Timofey Chuchkanov
         return postsOrder[timetable[0]];
     }
 </script>
+
+<svelte:window on:timetablesloaded={ fetchAndSetData } />
 
 <PageMetaTitle title='Sufflain | Расписание занятий' />
 
