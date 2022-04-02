@@ -16,7 +16,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 -->
 
 <script>
-    import { fetchGroups, fetchNames } from '../data/couch';
+    import { fetchGroups, fetchNames } from '../data/remote.js';
     import LoadingIndicator from '../components/LoadingIndicator.svelte';
     import UserSelectForm from '../components/UserSelectForm.svelte';
     import PageMetaTitle from '../components/PageMetaTitle.svelte';
