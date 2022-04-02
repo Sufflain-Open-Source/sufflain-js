@@ -17,22 +17,27 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <script>
     import PageMetaTitle from '../../components/PageMetaTitle.svelte';
-    import { fetchTimetables, fetchOrder, fetchTeacherTimetables } from '../../data/couch.js';
+    import { fetchOrder, fetchTeacherTimetables, fetchTimetables } from '../../data/couch.js';
     import { getGroup, getName } from '../../data/local.js';
+    import { getTimetables, setTimetables } from '../../data/session.js';
     import LinkCard from '../../components/LinkCard.svelte';
     import { url } from '@roxi/routify';
     import { onMount } from 'svelte';
     
-    const name = getName();
-    const group = getGroup();
-
     let timetables;
     let sortedTimetables;
     let postsOrder;
 
     onMount(async () => {
-        timetables = Object.entries(typeof group == 'string' ? await fetchTimetables(group) : await fetchTeacherTimetables(name));
+        const group = getGroup();
+        const name = getName();
+
+        typeof group == 'string' ? 
+            setTimetables(Object.entries(await fetchTimetables(group))) : 
+            setTimetables(Object.entries(await fetchTeacherTimetables(name)))
+
         postsOrder = await fetchOrder();
+        timetables = getTimetables();
 
         sortedTimetables = sortTimetablesByTimePosted(timetables, postsOrder);
     });
