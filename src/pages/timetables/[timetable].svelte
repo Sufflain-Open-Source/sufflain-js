@@ -19,6 +19,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { getTimetables } from '../../data/session.js';
     import { requestTimetablesEvent } from '../../events/custom-window-events.js';
     import { onMount } from 'svelte';
+    import { putAllGroupsLessonsTogether, groupLessonsWithSameTime } from '../../util/timetables_alteration.js';
 
     let timetables = getTimetables();
     const path = window.location.pathname;
@@ -38,6 +39,9 @@ Copyright (C) 2022 Timofey Chuchkanov
         console.log(timetableHash)
         console.log(timetables)
         console.log(timetables.find(table => table[0] == timetableHash))
+        console.log(timetables.length)
+        console.log(putAllGroupsLessonsTogether(timetables[0]))
+        console.log(groupLessonsWithSameTime(putAllGroupsLessonsTogether(timetables[0])))
     }
 </script>
 
