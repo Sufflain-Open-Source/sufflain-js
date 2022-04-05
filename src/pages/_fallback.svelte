@@ -15,4 +15,8 @@ Copyright (C) 2022 Timofey Chuchkanov
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-<h1>Страница не найдена</h1>
+<script>
+    import NotFound from '../components/NotFound.svelte';
+</script>
+
+<NotFound />

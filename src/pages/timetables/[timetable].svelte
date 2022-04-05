@@ -20,29 +20,79 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { requestTimetablesEvent } from '../../events/custom-window-events.js';
     import { onMount } from 'svelte';
     import { putAllGroupsLessonsTogether, groupLessonsWithSameTime } from '../../util/timetables_alteration.js';
+    import { getName } from '../../data/local.js';
+    import GroupTable from '../../components/GroupTable.svelte';
+    import NotFound from '../../components/NotFound.svelte';
 
-    let timetables = getTimetables();
     const path = window.location.pathname;
     const timetableHash = path.substring(path.lastIndexOf('/')).replace('/', '');
+    const name = getName();
+
+    let isNotFound = false;
+
+    let timetables;
+    let selectedTimetable;
+    let restructuredTimetable;
 
     onMount(() => { 
-        console.log(timetables)
         if (!timetables) {
-            console.log('dispatching')
             dispatchEvent(requestTimetablesEvent); 
         }
     });
 
     function setTimetablesToFetched() {
         timetables = getTimetables();
-        console.log('show')
-        console.log(timetableHash)
-        console.log(timetables)
-        console.log(timetables.find(table => table[0] == timetableHash))
-        console.log(timetables.length)
-        console.log(putAllGroupsLessonsTogether(timetables[0]))
-        console.log(groupLessonsWithSameTime(putAllGroupsLessonsTogether(timetables[0])))
+        const isHashPresent = isHashPresentInTimetables(timetableHash, timetables)
+
+        if (!timetables || !isHashPresent) {
+            isNotFound = true;
+            return;
+        }
+
+        selectedTimetable = timetables.find(table => table[0] == timetableHash);
+        if (name) restructuredTimetable = groupLessonsWithSameTime(putAllGroupsLessonsTogether(selectedTimetable));
+    }
+
+    function isHashPresentInTimetables(hash, tables) {
+        const foundHash = tables.find(table => table[0] == hash);
+
+        return typeof foundHash == 'undefined' ? false : true;
     }
 </script>
 
 <svelte:window on:timetablesloaded={ setTimetablesToFetched } />
+
+{#if !isNotFound}
+    <table>
+        <thead>
+            <tr>
+                <td id="time-title">Время</td>
+                <td id="data-title">Информация</td>
+            </tr>
+        </thead>
+        {#if restructuredTimetable}
+            {#each restructuredTimetable as lesson}
+                    <tr>
+                        <td>{ lesson[0].time }</td>
+                        <td>
+                            {#each lesson as groupLesson}
+                                <GroupTable title={ groupLesson.title } data={ groupLesson.data } />
+                            {/each}
+                        </td>
+                    </tr>
+            {/each}
+      {/if}
+      {#if selectedTimetable && !restructuredTimetable}
+            {#each selectedTimetable[1].lessons as lesson}
+                <tr>
+                    <td>{ lesson.time }</td>
+                    <td>
+                        <GroupTable data={ lesson.data } />
+                    </td>
+                </tr>
+            {/each}
+      {/if}
+    </table>
+{:else}
+    <NotFound />
+{/if}
