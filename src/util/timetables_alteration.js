@@ -19,8 +19,28 @@
 export function groupLessonsWithSameTime(allGroupsLessonsAggregated) {
     const lessonsTime = allGroupsLessonsAggregated.map(lesson => lesson.time);
     const lessonsGroupedByTime = lessonsTime.map(time => allGroupsLessonsAggregated.filter(lesson => lesson.time == time));
+    const uniqueLessons = [];
 
-    return lessonsGroupedByTime;
+    /*
+     * Since we use the map() function to group lessons by time, the grouping happens for all array elements.
+     *
+     * Therefore, for each group of related lessons, there will be n - 1 duplicates, where n is the number of these lessons.
+     *
+     * That's why we need to remove all the duplicate groups.
+     */
+    for (let i = 0; i < lessonsGroupedByTime.length; i++) {
+        const rest = lessonsGroupedByTime.slice(i + 1);
+
+        // The easiest way to find duplicates is by comparing elements' time.
+        const foundValue = rest.find(el => el[0].time == lessonsGroupedByTime[i][0].time);
+        const isDuplicateFound = typeof foundValue == 'object' ? true : false;
+
+        if (isDuplicateFound) continue;
+
+        uniqueLessons.push(lessonsGroupedByTime[i]);
+    }
+
+    return uniqueLessons;
 }
 
 export function putAllGroupsLessonsTogether(allGroupsEntries) {
