@@ -51,6 +51,23 @@ Copyright (C) 2022 Timofey Chuchkanov
 
         selectedTimetable = timetables.find(table => table[0] == timetableHash);
         if (name) restructuredTimetable = groupLessonsWithSameTime(putAllGroupsLessonsTogether(selectedTimetable));
+
+        if (!name) 
+            console.log(makeSortLessonsByTime(selectedTimetable[1].lessons, false)());
+        else
+            console.log(makeSortLessonsByTime(restructuredTimetable, true)());
+    }
+
+    // makeSortLessonsByTime :: [String] Boolean -> (-> [String])
+    // Sort timetable lessons by their time in ascending order.
+    function makeSortLessonsByTime(lessons, isTableRestrucured) {
+        return !isTableRestrucured ? () => lessons.sort((l, r) => l.time.localeCompare(r.time)) 
+                                   : () => lessons.sort((l, r) => {
+                                                 const lLessonsTime = l[0].time;
+                                                 const rLessonsTime = r[0].time;
+
+                                                 return lLessonsTime.localeCompare(rLessonsTime);
+                                           });
     }
 
     function isHashPresentInTimetables(hash, tables) {
@@ -83,7 +100,7 @@ Copyright (C) 2022 Timofey Chuchkanov
             {/each}
       {/if}
       {#if selectedTimetable && !restructuredTimetable}
-            {#each selectedTimetable[1].lessons as lesson}
+          {#each selectedTimetable[1].lessons as lesson}
                 <tr>
                     <td>{ lesson.time }</td>
                     <td>
