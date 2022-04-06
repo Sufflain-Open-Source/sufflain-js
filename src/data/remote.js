@@ -24,18 +24,22 @@ const timetablesFullPath = buildFullUrl(config.paths.timetable);
 const teacherTimetablesFullPath = buildFullUrl(config.paths.teacherTimetable);
 const orderFullPath = buildFullUrl(config.paths.postsOrder);
 
+// fetchTeacherTimetables :: String -> Object
 async function fetchTeacherTimetables(tid) {
     return await fetchFromDb(teacherTimetablesFullPath + tid);
 }
 
+// fetchTimetables :: String -> Object
 async function fetchTimetables(gid) {
     return await fetchFromDb(timetablesFullPath + gid);
 }
 
+// fetchOrder :: -> Object
 async function fetchOrder() {
     return await fetchFromDb(orderFullPath);
 }
 
+// fetchNames :: -> [Object]
 async function fetchNames() {
     const result = await fetchFromDb(namesFullPath);
     const data = result.data;
@@ -45,6 +49,7 @@ async function fetchNames() {
     return sortedData;
 }
 
+// fetchGroups :: -> [String]
 async function fetchGroups() {
     const result = await fetchFromDb(groupsFullPath);
     const data = result.data;
@@ -52,6 +57,7 @@ async function fetchGroups() {
     return data;
 }
 
+// fetchFromDb :: String -> Object
 async function fetchFromDb(fullPath) {
     const response = await fetch(fullPath, {
         type: 'GET',

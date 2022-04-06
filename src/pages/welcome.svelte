@@ -33,10 +33,12 @@ Copyright (C) 2022 Timofey Chuchkanov
             names = await fetchNames(); 
     });
 
+    // extractEventDetail :: Event -> Undefined
     function extractEventDetail(event) {
         detail = event.detail;
     }
 
+    // saveSelectedEntity :: -> Undefined
     function saveSelectedEntity() {
         detail && saveEntity(detail);
     }

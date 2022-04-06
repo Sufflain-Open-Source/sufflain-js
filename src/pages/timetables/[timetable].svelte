@@ -50,26 +50,28 @@ Copyright (C) 2022 Timofey Chuchkanov
         }
 
         selectedTimetable = timetables.find(table => table[0] == timetableHash);
+
         if (name) restructuredTimetable = groupLessonsWithSameTime(putAllGroupsLessonsTogether(selectedTimetable));
 
         if (!name) 
-            console.log(makeSortLessonsByTime(selectedTimetable[1].lessons, false)());
+            sortLessonsByTime(selectedTimetable[1].lessons, false);
         else
-            console.log(makeSortLessonsByTime(restructuredTimetable, true)());
+            sortLessonsByTime(restructuredTimetable, true);
     }
 
-    // makeSortLessonsByTime :: [String] Boolean -> (-> [String])
+    // sortLessonsByTime :: [String] Boolean -> Undefined
     // Sort timetable lessons by their time in ascending order.
-    function makeSortLessonsByTime(lessons, isTableRestrucured) {
-        return !isTableRestrucured ? () => lessons.sort((l, r) => l.time.localeCompare(r.time)) 
-                                   : () => lessons.sort((l, r) => {
-                                                 const lLessonsTime = l[0].time;
-                                                 const rLessonsTime = r[0].time;
+    function sortLessonsByTime(lessons, isTableRestrucured) {
+        (!isTableRestrucured ? () => lessons.sort((l, r) => l.time.localeCompare(r.time)) 
+                             : () => lessons.sort((l, r) => {
+                                         const lLessonsTime = l[0].time;
+                                         const rLessonsTime = r[0].time;
 
-                                                 return lLessonsTime.localeCompare(rLessonsTime);
-                                           });
+                                         return lLessonsTime.localeCompare(rLessonsTime);
+                                     }))();
     }
 
+    // isHashPresentInTimetables :: String [Object] -> Boolean
     function isHashPresentInTimetables(hash, tables) {
         const foundHash = tables.find(table => table[0] == hash);
 

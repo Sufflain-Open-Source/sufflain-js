@@ -18,6 +18,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 import { setName, setGroup, removeName, removeGroup } from '../data/local.js';
 import { UserType } from '../shared/const.js';
 
+// saveEntity :: Object -> Undefined
 function saveEntity({ checkedUserType, entity }) {
     if (entity.trim() != '') {
         if (checkedUserType == UserType.student) {

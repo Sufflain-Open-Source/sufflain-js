@@ -26,6 +26,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     let checkedUserType = UserType.student;
     let entity;
 
+    // dispatchUserSelect :: -> Undefined
     function dispatchUserSelect() {
         dispatch('userSelect', {
             checkedUserType,
@@ -33,6 +34,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         });
     }
 
+    // setUserType :: Event -> Undefined
     function setUserType(event) {
         const target = event.target;
         

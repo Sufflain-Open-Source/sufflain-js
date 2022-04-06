@@ -19,10 +19,12 @@ const storage = window.sessionStorage;
 
 const timetablesKey = 'tbl';
 
+// getTimetables :: -> Object
 export function getTimetables() {
     return JSON.parse(storage.getItem(timetablesKey));
 }
 
+// setTimetables :: Object -> Undefined
 export function setTimetables(entity) {
     storage.setItem(timetablesKey, JSON.stringify(entity));
 }

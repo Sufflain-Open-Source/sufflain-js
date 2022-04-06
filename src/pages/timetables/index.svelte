@@ -18,7 +18,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 <script>
     import PageMetaTitle from '../../components/PageMetaTitle.svelte';
     import { fetchOrder } from '../../data/remote.js';
-    import { getTimetables, } from '../../data/session.js';
+    import { getTimetables } from '../../data/session.js';
     import LinkCard from '../../components/LinkCard.svelte';
     import { requestTimetablesEvent } from '../../events/custom-window-events.js';
     import NavBar from '../../components/NavBar.svelte';
@@ -26,10 +26,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { onMount } from 'svelte';
     
     let timetables;
-    let sortedTimetables;
     let postsOrder;
 
-    onMount(async () => {
+    onMount(() => {
         dispatchEvent(requestTimetablesEvent);
     });
 
@@ -37,12 +36,13 @@ Copyright (C) 2022 Timofey Chuchkanov
         postsOrder = await fetchOrder();
         timetables = getTimetables();
 
-        sortedTimetables = sortTimetablesByTimePosted(timetables, postsOrder);
+        sortTimetablesByTimePosted(timetables, postsOrder);
         console.log('fetch and set')
     }
 
+    // sortTimetablesByTimePosted :: [Object] Object -> Undefined
     function sortTimetablesByTimePosted(timetables, postsOrder) {
-        return timetables.sort((first, second) => {
+        timetables.sort((first, second) => {
             const firstTimetableOrder = getTimetableOrderByHash(first, postsOrder);
             const secondTimetableOrder = getTimetableOrderByHash(second, postsOrder);
 
@@ -50,6 +50,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         });
     }
 
+    // getTimetableOrderByHash :: Object Object -> Number 
     function getTimetableOrderByHash(timetable, postsOrder) {
         return postsOrder[timetable[0]];
     }
@@ -60,9 +61,9 @@ Copyright (C) 2022 Timofey Chuchkanov
 <NavBar />
 <PageMetaTitle title='Sufflain | Расписание занятий' />
 
-{#if sortedTimetables}
+{#if timetables}
     <ol>
-        {#each sortedTimetables as timetable}
+        {#each timetables as timetable}
             <li><LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/></li>
         {/each}
     </ol>

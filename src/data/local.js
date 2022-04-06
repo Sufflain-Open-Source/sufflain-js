@@ -27,6 +27,7 @@ function getName() {
     return get(userNameKey);
 }
 
+// get :: String -> String or null
 function get(key) {
     return storage.getItem(key);
 }
@@ -39,6 +40,7 @@ function setName(entity) {
     set(userNameKey, entity);
 }
 
+// set :: String Any -> Undefined
 function set(key, val) {
     storage.setItem(key, val);
 }

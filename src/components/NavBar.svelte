@@ -24,10 +24,12 @@ Copyright (C) 2022 Timofey Chuchkanov
         settingsPage: isPageActive('settings')
     };
 
+    // invertPageActiveState :: String -> Undefined
     function invertPageActiveState(pgName) {
         pagesStates[pgName] = !pagesStates[pgName];
     }
 
+    // isPageActive :: String -> Boolean
     function isPageActive(pgName) {
         return pageName == pgName ? true : false;
     }

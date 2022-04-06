@@ -15,7 +15,7 @@
     along with this program.  If not, see <https:www.gnu.org/licenses/>.
  */
 
-
+// groupLessonsWithSameTime :: [Object] -> [Object]
 export function groupLessonsWithSameTime(allGroupsLessonsAggregated) {
     const lessonsTime = allGroupsLessonsAggregated.map(lesson => lesson.time);
     const lessonsGroupedByTime = lessonsTime.map(time => allGroupsLessonsAggregated.filter(lesson => lesson.time == time));
@@ -43,6 +43,7 @@ export function groupLessonsWithSameTime(allGroupsLessonsAggregated) {
     return uniqueLessons;
 }
 
+// putAllGroupsLessonsTogether :: [String Object] -> [Object]
 export function putAllGroupsLessonsTogether(allGroupsEntries) {
     const allGroupsEntriesData = allGroupsEntries[1].data; // Omit a timetable hash and select the data without linkTitle
     const allGroupsEntriesWithGeneralTitles = 
@@ -52,6 +53,7 @@ export function putAllGroupsLessonsTogether(allGroupsEntries) {
     return aggregatedGroupsLessons;
 }
 
+// addGeneralTitleToGroupLessons :: String [Object]
 export function addGeneralTitleToGroupLessons(title, lessons) {
     const lessonsWithTitle = lessons.map(lesson => Object.create({ ...lesson, title }));
 
