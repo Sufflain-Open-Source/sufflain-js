@@ -21,6 +21,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { getTimetables, } from '../../data/session.js';
     import LinkCard from '../../components/LinkCard.svelte';
     import { requestTimetablesEvent } from '../../events/custom-window-events.js';
+    import NavBar from '../../components/NavBar.svelte';
     import { url } from '@roxi/routify';
     import { onMount } from 'svelte';
     
@@ -56,6 +57,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <svelte:window on:timetablesloaded={ fetchAndSetData } />
 
+<NavBar />
 <PageMetaTitle title='Sufflain | Расписание занятий' />
 
 {#if sortedTimetables}
