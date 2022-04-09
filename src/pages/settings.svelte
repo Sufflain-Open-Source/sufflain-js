@@ -16,8 +16,88 @@ Copyright (C) 2022 Timofey Chuchkanov
 -->
 
 <script>
-    import NavBar from "../components/NavBar.svelte";
+    import { clearSessionStorage } from '../data/session.js';
+    import { UserType } from '../shared/const.js';
+    import { fetchGroups, fetchNames } from '../data/remote.js';
+    import { getGroup, getName, clearStorage } from '../data/local.js';
+    import LoadingIndicator from '../components/LoadingIndicator.svelte';
+    import UserSelectForm from '../components/UserSelectForm.svelte';
+    import PageMetaTitle from '../components/PageMetaTitle.svelte';
+    import { saveEntity } from '../util/entity_operations.js';
+    import NavBar from '../components/NavBar.svelte';
+    import { onMount }  from 'svelte';
+
+    let currentName;
+    let currentGroup;
+
+    let detail;
+    let groups;
+    let names;
+
+    let currentEntityToShow;
+    let inferredUserType;
+
+    onMount(async function() {
+        groups = await fetchGroups(); 
+        names = await fetchNames(); 
+
+        currentGroup = getGroup();
+        currentName = getName();
+        currentEntityToShow = getCurrentEntityToShow();
+        inferredUserType = inferCheckedUserTypeFromEntity();
+    });
+
+    function clearStorageOnConfirm() {
+        const userResponse = confirm('Удаление данных требует перезапуска приложения. Продолжить?');
+
+        if (userResponse) {
+            clearStorage();
+            clearSessionStorage();
+            window.location.reload();
+        }
+    }
+
+    // inferCheckedUserTypeFromEntity :: -> Number or Undefined
+    function inferCheckedUserTypeFromEntity() {
+        if (currentName)
+            return UserType.teacher;
+
+        if (currentGroup)
+            return UserType.student;
+    }
+
+    // getCurrentEntityToShow :: -> String or Undefined
+    function getCurrentEntityToShow() {
+        if (currentName)
+            return names.find(usr => usr[0] == currentName)[1];
+
+        if (currentGroup)
+            return currentGroup;
+    }
+
+    // extractEventDetail :: Event -> Undefined
+    function extractEventDetail(event) {
+        detail = event.detail;
+    }
+
+    // saveSelectedEntity :: -> Undefined
+    function saveSelectedEntity() {
+        detail.entity && saveEntity(detail);
+    }
 </script>
 
 <NavBar />
-<h1>Settings pages stub</h1>
+
+<PageMetaTitle title='Sufflain | Настройки' />
+
+{#if groups || names}
+    <UserSelectForm on:userSelect={ (e) => { extractEventDetail(e); saveSelectedEntity(); } }
+                    { names } 
+                    { groups } 
+                    currentUserType={ inferredUserType } 
+                    currentEntityToShow={ currentEntityToShow }>
+    </UserSelectForm> 
+    <button on:click|preventDefault={ clearStorageOnConfirm }>Удалить сохраненные данные</button>
+{:else}
+    <LoadingIndicator></LoadingIndicator>
+{/if}

@@ -57,6 +57,10 @@ function remove(key) {
     storage.removeItem(key);
 }
 
+function clearStorage() {
+    storage.clear();
+}
+
 export {
-    getGroup, setGroup, removeGroup, getName, setName, removeName
+    getGroup, setGroup, removeGroup, getName, setName, removeName, clearStorage
 }

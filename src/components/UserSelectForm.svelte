@@ -18,13 +18,27 @@ Copyright (C) 2022 Timofey Chuchkanov
 <script>
     import { UserType } from '../shared/const.js';
     import { createEventDispatcher, onMount } from 'svelte';
-    export let groups;
-    export let names;
 
     const dispatch = createEventDispatcher();
+    const defaultEntityPlaceholder = '---';
 
-    let checkedUserType = UserType.student;
+    export let groups = [];
+    export let names = [];
+    export let currentEntityToShow = defaultEntityPlaceholder;
+    export let currentUserType = UserType.student;
+
+    $: checkedUserType = currentUserType;
+    $: placeholder = currentEntityToShow;
+
     let entity;
+
+    // switchPlaceholderToDefaultIfUserTypeIs :: Number -> Undefined
+    function switchPlaceholderToDefaultIfUserTypeIs(type) {
+        if (currentUserType == type)
+            placeholder = defaultEntityPlaceholder;
+        else
+            placeholder = currentEntityToShow;
+    }
 
     // dispatchUserSelect :: -> Undefined
     function dispatchUserSelect() {
@@ -55,17 +69,19 @@ Copyright (C) 2022 Timofey Chuchkanov
         <h2>Выберите тип пользователя</h2>
 
         <label for="student">Студент</label>
-        <input on:change={ onRadioButtonChange } type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
+        <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.teacher); onRadioButtonChange(e) } } 
+               type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
 
         <label for="teacher">Преподаватель</label>
-        <input on:change={ onRadioButtonChange } type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
+        <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.student); onRadioButtonChange(e) } } 
+               type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
     </section>
     <section id="select-entity">
         {#if checkedUserType == 1}
             <h2>Выберите  группу</h2>
 
             <select bind:value={ entity } on:change={ dispatchUserSelect }>
-                <option value="">---</option>
+                <option value="">{ placeholder }</option>
                 {#each groups as group}
                     <option value={ group }>{ group }</option>
                 {/each}
@@ -74,7 +90,7 @@ Copyright (C) 2022 Timofey Chuchkanov
             <h2>Выберите  преподавателя</h2>
 
             <select bind:value={ entity } on:change={ dispatchUserSelect }>
-                <option value="">---</option>
+                <option value="">{ placeholder }</option>
                 {#each names as name}
                     <option value={ name[0] }>{ name[1] }</option>
                 {/each}

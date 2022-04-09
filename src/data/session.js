@@ -28,3 +28,7 @@ export function getTimetables() {
 export function setTimetables(entity) {
     storage.setItem(timetablesKey, JSON.stringify(entity));
 }
+
+export function clearSessionStorage() {
+    storage.clear();
+}

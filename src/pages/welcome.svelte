@@ -46,9 +46,12 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <PageMetaTitle title='Sufflain | Добро пожаловать' />
 
-{#if !groups && !names}
-    <LoadingIndicator></LoadingIndicator>
-{:else}
-    <UserSelectForm on:userSelect={ extractEventDetail } { names } { groups }></UserSelectForm> 
+{#if groups || names}
+    <UserSelectForm on:userSelect={ (e) => { extractEventDetail(e); saveSelectedEntity(); } }
+                    { names } 
+                    { groups }>
+    </UserSelectForm> 
     <button on:click={ () => { saveSelectedEntity(); $goto('/timetables'); } }>Продолжить</button>
+{:else}
+    <LoadingIndicator></LoadingIndicator>
 {/if}
