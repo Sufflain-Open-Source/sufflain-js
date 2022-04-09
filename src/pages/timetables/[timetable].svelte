@@ -83,6 +83,10 @@ Copyright (C) 2022 Timofey Chuchkanov
 <svelte:window on:timetablesloaded={ setTimetablesToFetched } />
 
 {#if !isNotFound}
+    {#if selectedTimetable && !restructuredTimetable}
+        <h2>{ selectedTimetable[1].title }</h2>
+    {/if}
+
     <table>
         <thead>
             <tr>
