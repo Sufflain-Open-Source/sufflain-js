@@ -40,18 +40,21 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // saveSelectedEntity :: -> Undefined
     function saveSelectedEntity() {
-        detail && saveEntity(detail);
+        if (detail.entity) {
+            saveEntity(detail);
+            $goto('/timetables');
+        }
     }
 </script>
 
 <PageMetaTitle title='Sufflain | Добро пожаловать' />
 
 {#if groups || names}
-    <UserSelectForm on:userSelect={ (e) => { extractEventDetail(e); saveSelectedEntity(); } }
+    <UserSelectForm on:userSelect={ extractEventDetail }
                     { names } 
                     { groups }>
     </UserSelectForm> 
-    <button on:click={ () => { saveSelectedEntity(); $goto('/timetables'); } }>Продолжить</button>
+    <button on:click={ saveSelectedEntity }>Продолжить</button>
 {:else}
     <LoadingIndicator></LoadingIndicator>
 {/if}
