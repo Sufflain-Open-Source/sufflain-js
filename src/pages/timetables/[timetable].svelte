@@ -50,6 +50,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         }
 
         selectedTimetable = timetables.find(table => table[0] == timetableHash);
+        document.title = `Sufflain | ${ selectedTimetable[1].linkTitle }`;
 
         if (name) restructuredTimetable = groupLessonsWithSameTime(putAllGroupsLessonsTogether(selectedTimetable));
 
