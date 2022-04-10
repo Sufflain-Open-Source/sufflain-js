@@ -22,6 +22,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import LinkCard from '../../components/LinkCard.svelte';
     import { requestTimetablesEvent } from '../../events/custom-window-events.js';
     import NavBar from '../../components/NavBar.svelte';
+    import LoadingIndicator from '../../components/LoadingIndicator.svelte';
     import { url } from '@roxi/routify';
     import { onMount } from 'svelte';
     
@@ -65,4 +66,8 @@ Copyright (C) 2022 Timofey Chuchkanov
     {#each timetables as timetable}
         <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
     {/each}
+{:else if timetables == []}
+    <p>Здесь нечего показывать.</p>
+{:else}
+    <LoadingIndicator />
 {/if}
