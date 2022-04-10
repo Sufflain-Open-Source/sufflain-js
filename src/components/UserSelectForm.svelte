@@ -98,3 +98,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         {/if}
     </section>
 </form>
+
+<style>
+    
+</style>

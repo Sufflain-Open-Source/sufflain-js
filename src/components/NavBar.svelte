@@ -44,4 +44,29 @@ Copyright (C) 2022 Timofey Chuchkanov
     .page-active {
         color: black;
     }
+
+    nav {
+        display: flex;
+        gap: 4rem;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: var(--dark-red);
+        height: 3.6rem;
+    }
+
+    nav a {
+        display: inline-block;
+        color: var(--light-blue);
+        padding: .44rem;
+        border-radius: 1.11rem;
+    }
+
+    nav a.page-active {
+        color: var(--dark-red);
+        background-color: var(--light-blue);
+    }
 </style>

@@ -23,6 +23,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { getName } from '../../data/local.js';
     import GroupTable from '../../components/GroupTable.svelte';
     import NotFound from '../../components/NotFound.svelte';
+    import NavBar from '../../components/NavBar.svelte';
 
     const path = window.location.pathname;
     const timetableHash = path.substring(path.lastIndexOf('/')).replace('/', '');
@@ -79,6 +80,8 @@ Copyright (C) 2022 Timofey Chuchkanov
         return typeof foundHash == 'undefined' ? false : true;
     }
 </script>
+
+<NavBar />
 
 <svelte:window on:timetablesloaded={ setTimetablesToFetched } />
 
