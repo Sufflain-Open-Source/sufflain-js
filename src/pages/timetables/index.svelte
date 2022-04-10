@@ -62,9 +62,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 <PageMetaTitle title='Sufflain | Расписание занятий' />
 
 {#if timetables}
-    <ol>
-        {#each timetables as timetable}
-            <li><LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/></li>
-        {/each}
-    </ol>
+    {#each timetables as timetable}
+        <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
+    {/each}
 {/if}
