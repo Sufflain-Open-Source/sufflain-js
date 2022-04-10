@@ -26,7 +26,8 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // invertPageActiveState :: String -> Undefined
     function invertPageActiveState(pgName) {
-        pagesStates[pgName] = !pagesStates[pgName];
+        const state = pagesStates[pgName];
+        pagesStates[pageName] = state == true ? false : true;
     }
 
     // isPageActive :: String -> Boolean
@@ -36,8 +37,8 @@ Copyright (C) 2022 Timofey Chuchkanov
 </script>
 
 <nav>
-    <a href="/timetables" class:page-active={ pagesStates.timetablesPage } on:click={ () => invertPageActiveState('timetablesPage') }>Главная</a>
-    <a href="/settings" class:page-active={ pagesStates.settingsPage } on:click={ () => invertPageActiveState('settingsPage') }>Настройки</a>
+    <a href="/timetables" class:page-active={ pagesStates.timetablesPage } on:click={ () => invertPageActiveState('settingsPage') }>Главная</a>
+    <a href="/settings" class:page-active={ pagesStates.settingsPage } on:click={ () => invertPageActiveState('timetablesPage') }>Настройки</a>
 </nav>
 
 <style>
