@@ -55,7 +55,16 @@ Copyright (C) 2022 Timofey Chuchkanov
                     { names } 
                     { groups }>
     </UserSelectForm> 
-    <Button onClick={ saveSelectedEntity } text="Продолжить" buttonsClass="mainButton" />
+    <div class="form-button-container">
+        <Button onClick={ saveSelectedEntity } text="Продолжить" buttonsClass="mainButton" />
+    </div>
 {:else}
     <LoadingIndicator></LoadingIndicator>
 {/if}
+
+<style>
+    .form-button-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
