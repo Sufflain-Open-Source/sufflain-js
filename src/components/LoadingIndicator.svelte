@@ -6,7 +6,7 @@
     div.loadingContainer {
         display: grid;
         place-items: center;
-        height: 100%;
+        height: 100vh;
         width: 100%;
         position: absolute;
         top: 50%;
