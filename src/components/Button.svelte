@@ -7,6 +7,10 @@
 <button class={ buttonsClass } on:click|preventDefault={ onClick }>{ text }</button>
 
 <style>
+    button:hover {
+        cursor: pointer;
+    }
+
     button {
         padding: 20px 10px;
         border-radius: 1.11rem;
