@@ -11,7 +11,7 @@
         padding: 20px 10px;
         border-radius: 1.11rem;
         border-style: none;
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, .3);;
+        box-shadow: var(--default-shadow);
     }
 
     button.mainButton {

@@ -100,5 +100,14 @@ Copyright (C) 2022 Timofey Chuchkanov
 </form>
 
 <style>
-    
+    select {
+        background-color: var(--light-blue);
+        border-style: none;
+        border-radius: 1.11rem;
+        padding: 20px 20px;
+        box-shadow: var(--default-shadow);
+        -webkit-box-shadow: var(--default-shadow);
+        -moz-box-shadow: var(--default-shadow);
+        color: var(--dark-red);
+    }
 </style>

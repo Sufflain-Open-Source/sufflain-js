@@ -29,7 +29,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         margin: 2.22rem 1.11rem 0 1.11rem;
         color: var(--dark-red);
         background-color: var(--light-blue);
-        box-shadow: 0px 1px 4px rgba(0, 0, 0, .3);
+        box-shadow: var(--default-shadow);
         text-align: center;
     }
 </style>
