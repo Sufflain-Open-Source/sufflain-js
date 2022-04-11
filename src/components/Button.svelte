@@ -16,6 +16,8 @@
         border-radius: 1.11rem;
         border-style: none;
         box-shadow: var(--default-shadow);
+        max-width: 277px;
+        align-self: center;
     }
 
     button.mainButton {

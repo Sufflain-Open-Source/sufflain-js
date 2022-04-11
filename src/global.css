@@ -12,6 +12,11 @@
 	--nav-bar-height: 2.8rem;  
 }
 
+* {
+	padding: 0;
+	margin: 0;
+}
+
 html, body {
 	position: relative;
 	width: 100%;
@@ -19,6 +24,7 @@ html, body {
 }
 
 body {
+	color: var(--dark-red);
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;

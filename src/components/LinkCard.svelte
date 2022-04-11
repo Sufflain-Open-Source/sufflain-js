@@ -31,5 +31,6 @@ Copyright (C) 2022 Timofey Chuchkanov
         background-color: var(--light-blue);
         box-shadow: var(--default-shadow);
         text-align: center;
+        border-radius: 1.11rem;
     }
 </style>

@@ -97,8 +97,9 @@ Copyright (C) 2022 Timofey Chuchkanov
                     { groups } 
                     currentUserType={ inferredUserType } 
                     currentEntityToShow={ currentEntityToShow }>
+                    
+                    <Button onClick={ clearStorageOnConfirm } buttonsClass="tertiaryButton" text="Удалить сохраненные данные" />
     </UserSelectForm> 
-    <Button onClick={ clearStorageOnConfirm } buttonsClass="tertiaryButton" text="Удалить сохраненные данные" />
 {:else}
     <LoadingIndicator></LoadingIndicator>
 {/if}

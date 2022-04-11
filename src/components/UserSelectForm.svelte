@@ -68,13 +68,17 @@ Copyright (C) 2022 Timofey Chuchkanov
     <section id="select-user-type">
         <h2>Выберите тип пользователя</h2>
 
-        <label for="student">Студент</label>
-        <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.teacher); onRadioButtonChange(e) } } 
-               type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
+        <div class="userTypeSelector">
+            <label for="student">Студент</label>
+            <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.teacher); onRadioButtonChange(e) } } 
+                   type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
+        </div>
 
-        <label for="teacher">Преподаватель</label>
-        <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.student); onRadioButtonChange(e) } } 
-               type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
+        <div class="userTypeSelector">
+            <label for="teacher">Преподаватель</label>
+            <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.student); onRadioButtonChange(e) } } 
+                type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
+        </div>
     </section>
     <section id="select-entity">
         {#if checkedUserType == 1}
@@ -97,9 +101,27 @@ Copyright (C) 2022 Timofey Chuchkanov
             </select>
         {/if}
     </section>
+    
+    <slot></slot>
 </form>
 
 <style>
+    label {
+        margin-left: 1ch;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    section {
+        margin-bottom: 2.22rem;
+    }
+
+    section:last-of-type {
+        margin-bottom: 8.88rem;
+    }
+
     select {
         background-color: var(--light-blue);
         border-style: none;
@@ -109,5 +131,18 @@ Copyright (C) 2022 Timofey Chuchkanov
         -webkit-box-shadow: var(--default-shadow);
         -moz-box-shadow: var(--default-shadow);
         color: var(--dark-red);
+    }
+
+    div.userTypeSelector {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-bottom: 1rem;
+        justify-content: left;
+    }
+
+    form {
+        margin: 2.22rem 1.11rem 0 1.11rem;
+        display: flex;
+        flex-direction: column;
     }
 </style>
