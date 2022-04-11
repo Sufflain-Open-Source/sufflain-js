@@ -20,6 +20,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import LoadingIndicator from '../components/LoadingIndicator.svelte';
     import UserSelectForm from '../components/UserSelectForm.svelte';
     import PageMetaTitle from '../components/PageMetaTitle.svelte';
+    import Button from '../components/Button.svelte';
     import { saveEntity } from '../util/entity_operations.js';
     import { onMount }  from 'svelte';
     import { goto } from '@roxi/routify';
@@ -54,7 +55,7 @@ Copyright (C) 2022 Timofey Chuchkanov
                     { names } 
                     { groups }>
     </UserSelectForm> 
-    <button on:click={ saveSelectedEntity }>Продолжить</button>
+    <Button onClick={ saveSelectedEntity } text="Продолжить" buttonsClass="mainButton" />
 {:else}
     <LoadingIndicator></LoadingIndicator>
 {/if}

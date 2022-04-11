@@ -25,6 +25,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import PageMetaTitle from '../components/PageMetaTitle.svelte';
     import { saveEntity } from '../util/entity_operations.js';
     import NavBar from '../components/NavBar.svelte';
+    import Button from '../components/Button.svelte';
     import { onMount }  from 'svelte';
 
     let currentName;
@@ -97,7 +98,7 @@ Copyright (C) 2022 Timofey Chuchkanov
                     currentUserType={ inferredUserType } 
                     currentEntityToShow={ currentEntityToShow }>
     </UserSelectForm> 
-    <button on:click|preventDefault={ clearStorageOnConfirm }>Удалить сохраненные данные</button>
+    <Button onClick={ clearStorageOnConfirm } buttonsClass="tertiaryButton" text="Удалить сохраненные данные" />
 {:else}
     <LoadingIndicator></LoadingIndicator>
 {/if}
