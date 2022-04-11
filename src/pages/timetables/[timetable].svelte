@@ -86,48 +86,57 @@ Copyright (C) 2022 Timofey Chuchkanov
 <svelte:window on:timetablesloaded={ setTimetablesToFetched } />
 
 {#if !isNotFound}
-    {#if selectedTimetable && !restructuredTimetable}
-        <h2>{ selectedTimetable[1].title }</h2>
-    {/if}
+    <div class="table-container">
+        {#if selectedTimetable && !restructuredTimetable}
+            <h2>{ selectedTimetable[1].title }</h2>
+        {/if}
 
-    <table>
-        <thead>
-            <tr>
-                <td id="time-title">Время</td>
-                <td id="data-title">Информация</td>
-            </tr>
-        </thead>
-        {#if restructuredTimetable}
-            {#each restructuredTimetable as lesson}
+        <table>
+            <thead>
+                <tr>
+                    <td id="time-title">Время</td>
+                    <td id="data-title">Информация</td>
+                </tr>
+            </thead>
+            {#if restructuredTimetable}
+                {#each restructuredTimetable as lesson}
+                        <tr>
+                            <td>{ lesson[0].time }</td>
+                            <td>
+                                {#each lesson as groupLesson}
+                                    <GroupTable title={ groupLesson.title } data={ groupLesson.data } />
+                                {/each}
+                            </td>
+                    </tr>
+                {/each}
+           {/if}
+           {#if selectedTimetable && !restructuredTimetable}
+              {#each selectedTimetable[1].lessons as lesson}
                     <tr>
-                        <td>{ lesson[0].time }</td>
+                        <td>{ lesson.time }</td>
                         <td>
-                            {#each lesson as groupLesson}
-                                <GroupTable title={ groupLesson.title } data={ groupLesson.data } />
-                            {/each}
+                            <GroupTable data={ lesson.data } />
                         </td>
                     </tr>
-            {/each}
-      {/if}
-      {#if selectedTimetable && !restructuredTimetable}
-          {#each selectedTimetable[1].lessons as lesson}
-                <tr>
-                    <td>{ lesson.time }</td>
-                    <td>
-                        <GroupTable data={ lesson.data } />
-                    </td>
-                </tr>
-            {/each}
-      {/if}
-    </table>
+                {/each}
+          {/if}
+        </table>
+    </div>
 {:else}
     <NotFound />
 {/if}
 
 <style>
+    .table-container {
+        display: grid;
+        place-items: center;
+        padding-top: .5rem;
+        margin: auto .5rem;
+    }
+
     table {
+        min-width: 100%;
         text-align: center;
-        margin: 2rem auto auto auto;
         border-collapse: collapse;
     }
 
@@ -147,5 +156,10 @@ Copyright (C) 2022 Timofey Chuchkanov
     tr:nth-child(1) {
         font-size: 1.33rem;
         background-color: var(--dark-blue);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: .5rem;
     }
 </style>
