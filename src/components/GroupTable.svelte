@@ -25,15 +25,16 @@
         box-shadow: var(--default-shadow);
     }
 
+    .group-table p {
+        padding: .55rem;
+        text-align: left;
+    }
+
     p.group-table-title {
         text-align: center;
         border-top-left-radius: 1.11rem;
         border-top-right-radius: 1.11rem;
         padding: 5px;
         background-color: var(--dark-blue);
-    }
-
-    .group-table p {
-        padding: .55rem;
     }
 </style>

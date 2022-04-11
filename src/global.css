@@ -1,43 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 :root {
-	--light-red: #fe8599;
-	--medium-red: #fe4466;
-	--dark-red: #773c62;
-	--light-blue: #eafeff;
-	--medium-blue: #c6f5fe;
-	--dark-blue: #84cfff;
-	--default-shadow: 0px 1px 4px rgba(0, 0, 0, .3);
+    --light-red: #fe8599;
+    --medium-red: #fe4466;
+    --dark-red: #773c62;
+    --light-blue: #eafeff;
+    --medium-blue: #c6f5fe;
+    --dark-blue: #84cfff;
+    --default-shadow: 0px 1px 4px rgba(0, 0, 0, .3);
   
-	--nav-bar-height: 2.8rem;  
+    --nav-bar-height: 2.8rem;  
 }
 
 * {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-	color: var(--dark-red);
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
-	font-size: 18px;
-	background-color: var(--medium-blue);
+    color: var(--dark-red);
+    margin: 0;
+    padding: 0 0 calc(var(--nav-bar-height) * 2) 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background-color: var(--medium-blue);
 }
 
 select, button {
-	font-size: inherit;
-	font-family: inherit;
+    font-size: inherit;
+    font-family: inherit;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 1.33rem;
 }

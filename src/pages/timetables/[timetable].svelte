@@ -123,3 +123,29 @@ Copyright (C) 2022 Timofey Chuchkanov
 {:else}
     <NotFound />
 {/if}
+
+<style>
+    table {
+        text-align: center;
+        margin: 2rem auto auto auto;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 15px 30px;
+    }
+
+    tr > td:nth-child(2) {
+        display: grid;
+        gap: 1rem;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(132, 207, 255, .2);
+    }
+
+    tr:nth-child(1) {
+        font-size: 1.33rem;
+        background-color: var(--dark-blue);
+    }
+</style>
