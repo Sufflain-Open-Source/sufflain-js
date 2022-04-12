@@ -88,7 +88,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 {#if !isNotFound}
     <div class="table-container">
         {#if selectedTimetable && !restructuredTimetable}
-            <h2>{ selectedTimetable[1].title }</h2>
+            <h2 id="group-title">{ selectedTimetable[1].title }</h2>
         {/if}
 
         <table>
@@ -159,9 +159,12 @@ Copyright (C) 2022 Timofey Chuchkanov
         background-color: var(--dark-blue);
     }
 
-    h2 {
+    h2#group-title {
         text-align: center;
+        padding: .5rem .5rem;
         margin-bottom: .5rem;
+        border-radius: 1.11rem;
+        background-color: rgba(254, 133, 153, .4);
     }
 
     @media (min-width: 820px) {
