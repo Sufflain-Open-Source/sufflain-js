@@ -20,7 +20,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     export let title;
 </script>
 
-<a class="linkCard" href={ link }>{ title }</a>
+<a class="linkCard hoverable-with-gradient" href={ link }>{ title }</a>
 
 <style>
     a.linkCard {
@@ -32,6 +32,11 @@ Copyright (C) 2022 Timofey Chuchkanov
         box-shadow: var(--default-shadow);
         text-align: center;
         border-radius: 1.11rem;
+    }
+
+    a.linkCard:hover {
+        background: none;
+        color: var(--light-blue);
     }
 
     @media (min-width: 550px) {

@@ -136,11 +136,19 @@ Copyright (C) 2022 Timofey Chuchkanov
         color: var(--dark-red);
     }
 
+    select:hover {
+        cursor: pointer
+    }
+
     div.userTypeSelector {
         display: flex;
         flex-direction: row-reverse;
         margin-bottom: 1rem;
         justify-content: left;
+    }
+
+    .userTypeSelector *:hover {
+        cursor: pointer;
     }
 
     form {

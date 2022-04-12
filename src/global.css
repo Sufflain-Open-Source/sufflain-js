@@ -46,6 +46,32 @@ h2 {
     font-size: 1.33rem;
 }
 
+.hoverable-with-gradient {
+    transition: .3s;
+    border-radius: 1.11rem;
+    position: relative;
+}
+
+.hoverable-with-gradient::before {
+    border-radius: 1.11rem;
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(17deg, rgba(132,207,255,1) 0%, 
+                                       rgba(135,131,173,1) 25%, 
+                                       rgba(137,80,119,1) 42%, 
+                                       rgba(138,61,99,1) 50%, 
+                                       rgba(139,61,99,1) 52%, 
+                                       rgba(140,61,99,1) 54%, 
+                                       rgba(146,62,99,1) 64%, 
+                                       rgba(182,64,100,1) 77%, 
+                                       rgba(254,68,102,1) 100%);
+}
+
 @media (min-width: 1280px) {
     body {
         padding: calc(var(--nav-bar-height) * 2) 0 calc(var(--nav-bar-height) * 2) 0;
