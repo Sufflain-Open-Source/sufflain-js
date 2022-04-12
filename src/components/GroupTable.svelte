@@ -17,6 +17,7 @@
 
 <style>
     .group-table {
+        width: 168.281px;
         border-radius: 1.11rem;
     }
 
@@ -37,4 +38,5 @@
         padding: 5px;
         background-color: var(--dark-blue);
     }
+
 </style>

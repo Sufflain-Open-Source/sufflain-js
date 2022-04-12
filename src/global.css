@@ -48,6 +48,6 @@ h2 {
 
 @media (min-width: 1280px) {
     body {
-        padding: calc(var(--nav-bar-height) * 2) 0 0 0;
+        padding: calc(var(--nav-bar-height) * 2) 0 calc(var(--nav-bar-height) * 2) 0;
     }
 }

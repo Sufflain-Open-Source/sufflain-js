@@ -147,6 +147,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     tr > td:nth-child(2) {
         display: grid;
         gap: 1rem;
+        place-items: center;
     }
 
     tr:nth-child(even) {
@@ -161,5 +162,13 @@ Copyright (C) 2022 Timofey Chuchkanov
     h2 {
         text-align: center;
         margin-bottom: .5rem;
+    }
+
+    @media (min-width: 820px) {
+        .table-container {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 </style>
