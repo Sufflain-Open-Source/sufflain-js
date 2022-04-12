@@ -54,10 +54,10 @@ Copyright (C) 2022 Timofey Chuchkanov
     <UserSelectForm on:userSelect={ extractEventDetail }
                     { names } 
                     { groups }>
+        <div class="form-button-container">
+            <Button onClick={ saveSelectedEntity } text="Продолжить" buttonsClass="mainButton" />
+        </div>
     </UserSelectForm> 
-    <div class="form-button-container">
-        <Button onClick={ saveSelectedEntity } text="Продолжить" buttonsClass="mainButton" />
-    </div>
 {:else}
     <LoadingIndicator></LoadingIndicator>
 {/if}

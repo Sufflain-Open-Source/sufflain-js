@@ -65,46 +65,48 @@ Copyright (C) 2022 Timofey Chuchkanov
     onMount(() => dispatchUserSelect());
 </script>
 
-<form on:submit|preventDefault>
-    <section id="select-user-type">
-        <h2>Выберите тип пользователя</h2>
-
-        <div class="userTypeSelector">
-            <label for="student">Студент</label>
-            <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.teacher); onRadioButtonChange(e) } } 
-                   type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
-        </div>
-
-        <div class="userTypeSelector">
-            <label for="teacher">Преподаватель</label>
-            <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.student); onRadioButtonChange(e) } } 
-                type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
-        </div>
-    </section>
-    <section id="select-entity">
-        {#if checkedUserType == 1}
-            <h2>Выберите  группу</h2>
-
-            <select bind:value={ entity } on:change={ dispatchUserSelect }>
-                <option value="">{ placeholder }</option>
-                {#each groupsSorted as group}
-                    <option value={ group }>{ group }</option>
-                {/each}
-            </select>
-        {:else}
-            <h2>Выберите  преподавателя</h2>
-
-            <select bind:value={ entity } on:change={ dispatchUserSelect }>
-                <option value="">{ placeholder }</option>
-                {#each names as name}
-                    <option value={ name[0] }>{ name[1] }</option>
-                {/each}
-            </select>
-        {/if}
-    </section>
+<div class="form-container">
+    <form on:submit|preventDefault>
+        <section id="select-user-type">
+            <h2>Выберите тип пользователя</h2>
     
-    <slot></slot>
-</form>
+            <div class="userTypeSelector">
+                <label for="student">Студент</label>
+                <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.teacher); onRadioButtonChange(e) } } 
+                       type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
+            </div>
+    
+            <div class="userTypeSelector">
+                <label for="teacher">Преподаватель</label>
+                <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.student); onRadioButtonChange(e) } } 
+                    type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
+            </div>
+        </section>
+        <section id="select-entity">
+            {#if checkedUserType == 1}
+                <h2>Выберите  группу</h2>
+    
+                <select bind:value={ entity } on:change={ dispatchUserSelect }>
+                    <option value="">{ placeholder }</option>
+                    {#each groupsSorted as group}
+                        <option value={ group }>{ group }</option>
+                    {/each}
+                </select>
+            {:else}
+                <h2>Выберите  преподавателя</h2>
+
+                <select bind:value={ entity } on:change={ dispatchUserSelect }>
+                    <option value="">{ placeholder }</option>
+                    {#each names as name}
+                        <option value={ name[0] }>{ name[1] }</option>
+                    {/each}
+                </select>
+            {/if}
+        </section>
+    
+        <slot></slot>
+    </form>
+</div>
 
 <style>
     label {
@@ -145,5 +147,10 @@ Copyright (C) 2022 Timofey Chuchkanov
         margin: 2.22rem 1.11rem 0 1.11rem;
         display: flex;
         flex-direction: column;
+    }
+
+    .form-container {
+        display: grid;
+        place-items: center;
     }
 </style>
