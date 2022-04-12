@@ -55,7 +55,8 @@ Copyright (C) 2022 Timofey Chuchkanov
                     { names } 
                     { groups }>
         <div class="form-button-container">
-            <Button onClick={ saveSelectedEntity } text="Продолжить" buttonsClass="mainButton" />
+            <Button onClick={ () => { document.querySelector('form').reportValidity() && saveSelectedEntity() } } 
+                    text="Продолжить" buttonsClass="mainButton" />
         </div>
     </UserSelectForm> 
 {:else}

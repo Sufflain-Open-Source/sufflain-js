@@ -86,7 +86,7 @@ Copyright (C) 2022 Timofey Chuchkanov
             {#if checkedUserType == 1}
                 <h2>Выберите  группу</h2>
     
-                <select bind:value={ entity } on:change={ dispatchUserSelect }>
+                <select required bind:value={ entity } on:change={ dispatchUserSelect }>
                     <option value="">{ placeholder }</option>
                     {#each groupsSorted as group}
                         <option value={ group }>{ group }</option>
@@ -95,7 +95,7 @@ Copyright (C) 2022 Timofey Chuchkanov
             {:else}
                 <h2>Выберите  преподавателя</h2>
 
-                <select bind:value={ entity } on:change={ dispatchUserSelect }>
+                <select required bind:value={ entity } on:change={ dispatchUserSelect }>
                     <option value="">{ placeholder }</option>
                     {#each names as name}
                         <option value={ name[0] }>{ name[1] }</option>
