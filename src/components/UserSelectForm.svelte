@@ -27,6 +27,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     export let currentEntityToShow = defaultEntityPlaceholder;
     export let currentUserType = UserType.student;
 
+    $: groupsSorted = groups ? groups.sort((l, r) => l.localeCompare(r, 'ru', { numeric: true })) : [];
     $: checkedUserType = currentUserType;
     $: placeholder = currentEntityToShow;
 
@@ -86,7 +87,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
             <select bind:value={ entity } on:change={ dispatchUserSelect }>
                 <option value="">{ placeholder }</option>
-                {#each groups as group}
+                {#each groupsSorted as group}
                     <option value={ group }>{ group }</option>
                 {/each}
             </select>
