@@ -26,6 +26,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { url } from '@roxi/routify';
     import { onMount } from 'svelte';
     
+    let isNothingToShow = false;
     let timetables;
     let postsOrder;
 
@@ -38,7 +39,13 @@ Copyright (C) 2022 Timofey Chuchkanov
         timetables = getTimetables();
 
         sortTimetablesByTimePosted(timetables, postsOrder);
+
+        if (timetables == [] || areAllTimetablesLessonsEmpty(timetables))
+            isNothingToShow = true;
+
         console.log('fetch and set')
+        console.log(isNothingToShow)
+        console.log(timetables)
     }
 
     // sortTimetablesByTimePosted :: [Object] Object -> Undefined
@@ -55,6 +62,24 @@ Copyright (C) 2022 Timofey Chuchkanov
     function getTimetableOrderByHash(timetable, postsOrder) {
         return postsOrder[timetable[0]];
     }
+
+    // areAllTimetablesLessonsEmpty :: Object -> Boolean
+    function areAllTimetablesLessonsEmpty(timetables) {
+        return timetables.every(areTimetableLessonsEmpty);
+    }
+
+    // timetableLessonsEmpty :: Object -> Boolean
+    function areTimetableLessonsEmpty(timetable) {
+        let lessons = [];
+
+        if (timetable[1].lessons)
+            lessons = timetable[1].lessons;
+        
+        if (timetable[1].data)
+            lessons = timetable[1].data;
+
+        return lessons.length <= 0 ? true : false;
+    }
 </script>
 
 <svelte:window on:timetablesloaded={ fetchAndSetData } />
@@ -62,12 +87,25 @@ Copyright (C) 2022 Timofey Chuchkanov
 <NavBar />
 <PageMetaTitle title='Sufflain | Расписание занятий' />
 
-{#if timetables}
-    {#each timetables as timetable}
-        <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
-    {/each}
-{:else if timetables == []}
-    <p>Здесь нечего показывать.</p>
-{:else}
+{#if !timetables}
     <LoadingIndicator />
+{:else if isNothingToShow}
+    <p id="nothing-to-show" >Здесь нечего показывать.</p>
+{:else if timetables}
+    {#each timetables as timetable}
+        {#if !areTimetableLessonsEmpty(timetable)}
+            <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
+        {/if}
+    {/each}
 {/if}
+
+<style>
+    p#nothing-to-show {
+        display: inline-block;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
