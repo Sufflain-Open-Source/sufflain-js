@@ -37,8 +37,10 @@ Copyright (C) 2022 Timofey Chuchkanov
 </script>
 
 <nav>
-    <a href="/timetables" class:page-active={ pagesStates.timetablesPage } on:click={ () => invertPageActiveState('settingsPage') }>Главная</a>
-    <a href="/settings" class:page-active={ pagesStates.settingsPage } on:click={ () => invertPageActiveState('timetablesPage') }>Настройки</a>
+    <div class="nav-controls-container">
+        <a href="/timetables" class:page-active={ pagesStates.timetablesPage } on:click={ () => invertPageActiveState('settingsPage') }>Главная</a>
+        <a href="/settings" class:page-active={ pagesStates.settingsPage } on:click={ () => invertPageActiveState('timetablesPage') }>Настройки</a>
+    </div>
 </nav>
 
 <style>
@@ -46,17 +48,21 @@ Copyright (C) 2022 Timofey Chuchkanov
         color: black;
     }
 
-    nav {
+    .nav-controls-container {
         display: flex;
         gap: 4rem;
         justify-content: center;
         align-items: center;
+        height: 100%;
+    }
+
+    nav {
+        background-color: var(--dark-red);
+        height: 3.6rem;
         position: fixed;
         bottom: 0;
         right: 0;
         left: 0;
-        background-color: var(--dark-red);
-        height: 3.6rem;
     }
 
     nav a {
@@ -69,5 +75,27 @@ Copyright (C) 2022 Timofey Chuchkanov
     nav a.page-active {
         color: var(--dark-red);
         background-color: var(--light-blue);
+    }
+
+    @media (min-width: 1280px) {
+        nav {
+            bottom: none;
+            top: 0;
+            justify-content: center;
+        }
+
+        .nav-controls-container {
+            justify-content: flex-end;
+            padding-right: 8rem;
+        }
+    }
+
+    @media (min-width: 1920px) {
+        nav {
+            display: flex;
+        }
+        .nav-controls-container {
+            width: 1920px;
+        }
     }
 </style>

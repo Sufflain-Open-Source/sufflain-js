@@ -92,11 +92,13 @@ Copyright (C) 2022 Timofey Chuchkanov
 {:else if isNothingToShow}
     <p id="nothing-to-show" >Здесь нечего показывать.</p>
 {:else if timetables}
-    {#each timetables as timetable}
-        {#if !areTimetableLessonsEmpty(timetable)}
-            <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
-        {/if}
-    {/each}
+    <div class="cards-container">
+        {#each timetables as timetable}
+            {#if !areTimetableLessonsEmpty(timetable)}
+                <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
+            {/if}
+        {/each}
+    </div>
 {/if}
 
 <style>
@@ -107,5 +109,12 @@ Copyright (C) 2022 Timofey Chuchkanov
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    @media (min-width: 550px) {
+        .cards-container {
+            display: grid;
+            justify-content: center;
+        }
     }
 </style>

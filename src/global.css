@@ -45,3 +45,9 @@ a {
 h2 {
     font-size: 1.33rem;
 }
+
+@media (min-width: 1280px) {
+    body {
+        padding: calc(var(--nav-bar-height) * 2) 0 0 0;
+    }
+}

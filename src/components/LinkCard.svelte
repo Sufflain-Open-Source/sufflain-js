@@ -33,4 +33,10 @@ Copyright (C) 2022 Timofey Chuchkanov
         text-align: center;
         border-radius: 1.11rem;
     }
+
+    @media (min-width: 550px) {
+        a.linkCard {
+            width: 500px;
+        }
+    }
 </style>
