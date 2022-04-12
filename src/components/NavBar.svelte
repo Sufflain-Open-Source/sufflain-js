@@ -70,9 +70,10 @@ Copyright (C) 2022 Timofey Chuchkanov
         color: var(--light-blue);
         padding: .44rem;
         border-radius: 1.11rem;
+        transition: .3s;
     }
 
-    nav a.page-active {
+    nav a.page-active, nav a:hover {
         color: var(--dark-red);
         background-color: var(--light-blue);
     }
