@@ -81,11 +81,12 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 </script>
 
-<NavBar />
 
 <svelte:window on:timetablesloaded={ setTimetablesToFetched } />
 
 {#if !isNotFound}
+    <NavBar />
+
     <div class="table-container">
         {#if selectedTimetable && !restructuredTimetable}
             <h2 id="group-title">{ selectedTimetable[1].title }</h2>
