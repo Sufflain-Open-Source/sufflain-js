@@ -6,7 +6,7 @@
         "apimon": "nodemon --exec babel-node api/main.js",
         "dev": "run-p dev:* apimon",
         "dev:routify": "routify",
-        "dev:vite": "vite",
+        "dev:vite": "vite --host 0.0.0.0",
         "preview": "vite preview",
         "build": "rm -rf dist && routify -b && vite build && javascript-obfuscator --output dist dist"
     },

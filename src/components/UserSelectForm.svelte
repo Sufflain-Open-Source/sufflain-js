@@ -86,21 +86,29 @@ Copyright (C) 2022 Timofey Chuchkanov
             {#if checkedUserType == 1}
                 <h2>Выберите  группу</h2>
     
-                <select required bind:value={ entity } on:change={ dispatchUserSelect }>
-                    <option value="">{ placeholder }</option>
-                    {#each groupsSorted as group}
-                        <option value={ group }>{ group }</option>
-                    {/each}
-                </select>
+                <div class="select-container">
+                    <select required bind:value={ entity } on:change={ dispatchUserSelect }>
+                        <option value="">{ placeholder }</option>
+                        {#each groupsSorted as group}
+                            <option value={ group }>{ group }</option>
+                        {/each}
+                    </select>
+
+                    <p class="select-arrow">⌄</p>
+                </div>
             {:else}
                 <h2>Выберите  преподавателя</h2>
 
-                <select required bind:value={ entity } on:change={ dispatchUserSelect }>
-                    <option value="">{ placeholder }</option>
-                    {#each names as name}
-                        <option value={ name[0] }>{ name[1] }</option>
-                    {/each}
-                </select>
+                <div class="select-container">
+                    <select required bind:value={ entity } on:change={ dispatchUserSelect }>
+                        <option value="">{ placeholder }</option>
+                        {#each names as name}
+                            <option value={ name[0] }>{ name[1] }</option>
+                        {/each}
+                    </select>
+
+                    <p class="select-arrow">⌄</p>
+                </div>
             {/if}
         </section>
     
@@ -126,14 +134,27 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     select {
+        -webkit-appearance: none;
+        position: relative;
         background-color: var(--light-blue);
         border-style: none;
         border-radius: 1.11rem;
         padding: 20px 20px;
         box-shadow: var(--default-shadow);
-        -webkit-box-shadow: var(--default-shadow);
-        -moz-box-shadow: var(--default-shadow);
         color: var(--dark-red);
+    }
+
+    .select-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    select + p.select-arrow {
+        display: inline-block;
+        position: absolute;
+        right: 1ch;
+        top: 45%;
+        transform: translateY(-50%);
     }
 
     select:hover {
@@ -144,7 +165,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         display: flex;
         flex-direction: row-reverse;
         margin-bottom: 1rem;
-        justify-content: left;
+        justify-content: flex-end;
     }
 
     .userTypeSelector *:hover {
@@ -160,5 +181,11 @@ Copyright (C) 2022 Timofey Chuchkanov
     .form-container {
         display: grid;
         place-items: center;
+    }
+
+    @media not all and (min-resolution:.001dpcm) { 
+        select + p.select-arrow {
+            transform: translateY(-60%);
+        }
     }
 </style>
