@@ -8,9 +8,7 @@
         "dev:routify": "routify",
         "dev:vite": "vite",
         "preview": "vite preview",
-        "build": "run-s build:*",
-        "build:routify": "routify -b",
-        "build:vite": "vite build"
+        "build": "rm -rf dist && routify -b && vite build && javascript-obfuscator --output dist dist"
     },
     "devDependencies": {
         "@roxi/routify": "^2.18.4",
@@ -18,11 +16,13 @@
         "autoprefixer": "^10.4.2",
         "babel-cli": "^6.26.0",
         "babel-preset-es2015": "^6.24.1",
+        "javascript-obfuscator": "^4.0.0",
         "nodemon": "^2.0.15",
         "npm-run-all": "^4.1.5",
         "postcss": "^8.4.5",
         "postcss-import": "^14.0.2",
         "rimraf": "^3.0.2",
+        "sirv-cli": "^2.0.2",
         "svelte": "^3.45.0",
         "svelte-preprocess": "^4.10.1",
         "vite": "^2.7.10"

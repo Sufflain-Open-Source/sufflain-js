@@ -6,5 +6,7 @@ export default defineConfig({
         port: 5000,
     },
     
-    plugins: [svelte()],
+    plugins: [
+    svelte(),
+    ],
 });
