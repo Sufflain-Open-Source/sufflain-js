@@ -5,10 +5,11 @@
     "scripts": {
         "apimon": "nodemon --exec babel-node api/main.js",
         "dev": "run-p dev:* apimon",
-        "dev:routify": "routify",
+        "dev:routify": "routify -b",
         "dev:vite": "vite --host 0.0.0.0",
         "preview": "vite preview",
-        "build": "rm -rf dist && routify -b && vite build && javascript-obfuscator --output dist dist"
+        "build": "rm -rf dist && routify -b && vite build && javascript-obfuscator --output dist dist",
+        "build-sirv": "npm run build && cd dist && sirv -s"
     },
     "devDependencies": {
         "@roxi/routify": "^2.18.4",
@@ -30,6 +31,7 @@
     "dependencies": {
         "cors": "^2.8.5",
         "express": "^4.17.3",
-        "node-fetch": "^3.2.3"
+        "node-fetch": "^3.2.3",
+        "openpgp": "^5.2.1"
     }
 }
