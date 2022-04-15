@@ -9,4 +9,9 @@ export default defineConfig({
     plugins: [
     svelte(),
     ],
+
+    build: {
+        minify: 'esbuild',
+        target: 'esnext'
+    }
 });
