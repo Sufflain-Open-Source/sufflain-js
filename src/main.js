@@ -20,20 +20,14 @@ import {
     requestTimetablesEvent, 
     timetablesLoadedEvent } from './events/custom-window-events';
 import { getGroup, getName } from './data/local.js';
-import { fetchTeacherTimetables, fetchTimetables, fetchServerPubKey } from './data/remote.js';
-import { setTimetables, setServerPubKey, setKeyPair } from './data/session.js';
-import { generateKeyPair } from './cli-api-tools/main.js';
+import { fetchTeacherTimetables, fetchTimetables } from './data/remote.js';
+import { setTimetables } from './data/session.js';
+import { setupEncryption } from './cli-api-tools/main.js';
 import "./global.css";
 import HMR from "@roxi/routify/hmr";
 import App from "./App.svelte";
 
-(async function setupEncryption() {
-    const serverPubKey = await fetchServerPubKey();
-    const keyPair = await generateKeyPair(); 
-
-    setServerPubKey(serverPubKey);
-    setKeyPair(keyPair);
-})()
+await setupEncryption();
 
 const app = HMR(App, { target: document.body }, "routify-app");
 

@@ -76,6 +76,7 @@ async function fetchGroups() {
 // fetchFromDb :: String -> Object
 async function fetchFromDb(fullPath) {
     const keyPair = getKeyPair();
+    console.log(getServerPub())
     const payload = await encryptOwnPubKey(getServerPub().pub, keyPair.pub);
     const response = await fetch(fullPath, {
         method: 'POST',
