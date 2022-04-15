@@ -57,6 +57,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     nav {
+        z-index: 20;
         background-color: var(--dark-red);
         height: 3.6rem;
         position: fixed;
