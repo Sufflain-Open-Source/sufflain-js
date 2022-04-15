@@ -1,3 +1,6 @@
 [submodule "api"]
 	path = api
 	url = git@gitlab.com:Sufflain/api.git
+[submodule "src/cli-api-tools"]
+	path = src/cli-api-tools
+	url = git@gitlab.com:Sufflain/cli-api-tools.git
