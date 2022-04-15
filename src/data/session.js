@@ -18,10 +18,31 @@ Copyright (C) 2022 Timofey Chuchkanov
 const storage = window.sessionStorage;
 
 const timetablesKey = 'tbl';
+const serberPubKeyKey = 'spub';
+
+// getKeyPair :: -> Object
+export function getKeyPair() {
+    return JSON.parse(storage.getItem('kp'));
+}
+
+// getServerPub :: -> Object
+export function getServerPub() {
+    return JSON.parse(storage.getItem(serberPubKeyKey));
+}
 
 // getTimetables :: -> Object
 export function getTimetables() {
     return JSON.parse(storage.getItem(timetablesKey));
+}
+
+// setKeyPair :: Object -> Undefined
+export function setKeyPair(kp) {
+    storage.setItem('kp', JSON.stringify(kp));
+}
+
+// setServerPubKey :: Object -> Undefined
+export function setServerPubKey(pub) {
+    storage.setItem(serberPubKeyKey, JSON.stringify(pub));
 }
 
 // setTimetables :: Object -> Undefined
