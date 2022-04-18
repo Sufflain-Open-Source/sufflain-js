@@ -16,8 +16,8 @@
  */
 
 import config from '../../cli-config.js';
-import { getServerPub, getKeyPair } from '../data/session.js';
-import { encryptOwnPubKey, decryptServerResponse  } from '../cli-api-tools/main';
+import { getServerPub } from '../data/session.js';
+import { encryptApiKey } from '../cli-api-tools/main';
 
 const buildFullUrl = (path) => `${ config.baseUrl + path }/`;
 const groupsFullPath = buildFullUrl(config.paths.groups);
@@ -75,9 +75,7 @@ async function fetchGroups() {
 
 // fetchFromDb :: String -> Object
 async function fetchFromDb(fullPath) {
-    const keyPair = getKeyPair();
-    console.log(getServerPub())
-    const payload = await encryptOwnPubKey(getServerPub().pub, keyPair.pub);
+    const payload = await encryptApiKey(getServerPub().pub, config.shared);
     const response = await fetch(fullPath, {
         method: 'POST',
         headers: {
@@ -86,9 +84,8 @@ async function fetchFromDb(fullPath) {
         },
         body: JSON.stringify({ payload })
     });
-    const json = await response.json();
 
-    return JSON.parse(await decryptServerResponse(json, keyPair.pri));
+    return await response.json();
 }
 
 export {

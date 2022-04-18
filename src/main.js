@@ -16,8 +16,7 @@
  */
 
 import {
-    requestTimetablesEventName, 
-    requestTimetablesEvent, 
+    requestTimetablesEventName,
     timetablesLoadedEvent } from './events/custom-window-events';
 import { getGroup, getName } from './data/local.js';
 import { fetchTeacherTimetables, fetchTimetables } from './data/remote.js';
