@@ -14,19 +14,19 @@ Copyright (C) 2022 Timofey Chuchkanov
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <script>
-    import { clearSessionStorage } from '../data/session.js';
-    import { UserType } from '../shared/const.js';
-    import { fetchGroups, fetchNames } from '../data/remote.js';
-    import { getGroup, getName, clearStorage } from '../data/local.js';
-    import LoadingIndicator from '../components/LoadingIndicator.svelte';
-    import UserSelectForm from '../components/UserSelectForm.svelte';
-    import PageMetaTitle from '../components/PageMetaTitle.svelte';
-    import { saveEntity } from '../util/entity_operations.js';
-    import NavBar from '../components/NavBar.svelte';
-    import Button from '../components/Button.svelte';
-    import { onMount }  from 'svelte';
+    import { clearSessionStorage } from "../data/session.js";
+    import { UserType } from "../shared/const.js";
+    import { fetchGroups, fetchNames } from "../data/remote.js";
+    import { getGroup, getName, clearStorage } from "../data/local.js";
+    import LoadingIndicator from "../components/LoadingIndicator.svelte";
+    import UserSelectForm from "../components/UserSelectForm.svelte";
+    import PageMetaTitle from "../components/PageMetaTitle.svelte";
+    import { saveEntity } from "../util/entity_operations.js";
+    import NavBar from "../components/NavBar.svelte";
+    import Button from "../components/Button.svelte";
+    import Footer from "../components/Footer.svelte";
+    import { onMount } from "svelte";
 
     let currentName;
     let currentGroup;
@@ -38,9 +38,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     let currentEntityToShow;
     let inferredUserType;
 
-    onMount(async function() {
-        groups = await fetchGroups(); 
-        names = await fetchNames(); 
+    onMount(async function () {
+        groups = await fetchGroups();
+        names = await fetchNames();
 
         currentGroup = getGroup();
         currentName = getName();
@@ -49,7 +49,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     });
 
     function clearStorageOnConfirm() {
-        const userResponse = confirm('Удаление данных требует перезапуска приложения. Продолжить?');
+        const userResponse = confirm(
+            "Удаление данных требует перезапуска приложения. Продолжить?"
+        );
 
         if (userResponse) {
             clearStorage();
@@ -60,20 +62,16 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // inferCheckedUserTypeFromEntity :: -> Number or Undefined
     function inferCheckedUserTypeFromEntity() {
-        if (currentName)
-            return UserType.teacher;
+        if (currentName) return UserType.teacher;
 
-        if (currentGroup)
-            return UserType.student;
+        if (currentGroup) return UserType.student;
     }
 
     // getCurrentEntityToShow :: -> String or Undefined
     function getCurrentEntityToShow() {
-        if (currentName)
-            return names.find(usr => usr[0] == currentName)[1];
+        if (currentName) return names.find((usr) => usr[0] == currentName)[1];
 
-        if (currentGroup)
-            return currentGroup;
+        if (currentGroup) return currentGroup;
     }
 
     // extractEventDetail :: Event -> Undefined
@@ -89,17 +87,27 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <NavBar />
 
-<PageMetaTitle title='Sufflain | Настройки' />
+<PageMetaTitle title="Sufflain | Настройки" />
 
 {#if groups || names}
-    <UserSelectForm on:userSelect={ (e) => { extractEventDetail(e); saveSelectedEntity(); } }
-                    { names } 
-                    { groups } 
-                    currentUserType={ inferredUserType } 
-                    currentEntityToShow={ currentEntityToShow }>
-                    
-                    <Button onClick={ clearStorageOnConfirm } buttonsClass="tertiaryButton" text="Удалить сохраненные данные" />
-    </UserSelectForm> 
+    <UserSelectForm
+        on:userSelect={(e) => {
+            extractEventDetail(e);
+            saveSelectedEntity();
+        }}
+        {names}
+        {groups}
+        currentUserType={inferredUserType}
+        {currentEntityToShow}
+    >
+        <Button
+            onClick={clearStorageOnConfirm}
+            buttonsClass="tertiaryButton"
+            text="Удалить сохраненные данные"
+        />
+    </UserSelectForm>
 {:else}
-    <LoadingIndicator></LoadingIndicator>
+    <LoadingIndicator />
 {/if}
+
+<Footer appVersion="2.0 Domestic Dante (alpha1)" />
