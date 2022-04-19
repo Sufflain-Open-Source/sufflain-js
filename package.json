@@ -11,7 +11,7 @@
         "preview": "vite preview",
         "build": "rm -rf dist && routify -b && vite build && javascript-obfuscator --output dist dist",
         "build-sirv": "npm run build && cd dist && sirv -s",
-        "prod:sirv": "cd dist && sirv -s --host 0.0.0.0",
+        "prod:sirv": "cd dist && sirv -s --host 0.0.0.0 -p 8081",
         "prod": "run-p apimon prod:sirv"
     },
     "devDependencies": {
