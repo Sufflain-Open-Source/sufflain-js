@@ -41,11 +41,6 @@ Copyright (C) 2022 Timofey Chuchkanov
 
         if (timetables == [] || areAllTimetablesLessonsEmpty(timetables))
             isNothingToShow = true;
-
-        console.log("fetch and set");
-        console.log(isNothingToShow);
-        console.log(timetables);
-        console.log(timetables[0][0]);
     }
 
     // sortTimetablesByTimePosted :: [Object] Object -> Undefined

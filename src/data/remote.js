@@ -29,7 +29,6 @@ const serverPubKeyFullPath = buildFullUrl(config.paths.pubReq);
 
 // fetchServerPubKey :: -> Object
 async function fetchServerPubKey() {
-    console.log('pub')
     try {
         var response = await fetch(serverPubKeyFullPath);
     } catch (e) {
@@ -41,25 +40,21 @@ async function fetchServerPubKey() {
 
 // fetchTeacherTimetables :: String -> Object
 async function fetchTeacherTimetables(tid) {
-    console.log('ttables')
     return await fetchFromDb(teacherTimetablesFullPath + tid);
 }
 
 // fetchTimetables :: String -> Object
 async function fetchTimetables(gid) {
-    console.log('tables')
     return await fetchFromDb(timetablesFullPath + gid);
 }
 
 // fetchOrder :: -> Object
 async function fetchOrder() {
-    console.log('order')
     return await fetchFromDb(orderFullPath);
 }
 
 // fetchNames :: -> [Object]
 async function fetchNames() {
-    console.log('names')
     const result = await fetchFromDb(namesFullPath);
 
     if (result.err)
@@ -74,7 +69,6 @@ async function fetchNames() {
 
 // fetchGroups :: -> [String]
 async function fetchGroups() {
-    console.log('groups')
     const result = await fetchFromDb(groupsFullPath);
     const data = !result.err ? result.data : result;
 
