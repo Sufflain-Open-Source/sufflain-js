@@ -224,6 +224,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     .form-container {
         display: grid;
         place-items: center;
+        padding-bottom: calc(var(--nav-bar-height) * 2);
     }
 
     @media not all and (min-resolution: 0.001dpcm) {
