@@ -72,6 +72,11 @@ h2 {
                                        rgba(254,68,102,1) 100%);
 }
 
+.error {
+    color: red;
+    text-align: center;
+}
+
 @media (min-width: 1280px) {
     body {
         padding: calc(var(--nav-bar-height) * 2) 0 calc(var(--nav-bar-height) * 2) 0;

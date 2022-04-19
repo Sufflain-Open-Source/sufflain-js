@@ -19,7 +19,7 @@ import config from '../../cli-config.js';
 import { getServerPub } from '../data/session.js';
 import { encryptApiKey } from '../cli-api-tools/main';
 
-const buildFullUrl = (path) => `${ config.baseUrl + path }/`;
+const buildFullUrl = (path) => `${config.baseUrl + path}/`;
 const groupsFullPath = buildFullUrl(config.paths.groups);
 const namesFullPath = buildFullUrl(config.paths.names);
 const timetablesFullPath = buildFullUrl(config.paths.timetable);
@@ -30,7 +30,12 @@ const serverPubKeyFullPath = buildFullUrl(config.paths.pubReq);
 // fetchServerPubKey :: -> Object
 async function fetchServerPubKey() {
     console.log('pub')
-    const response = await fetch(serverPubKeyFullPath);
+    try {
+        var response = await fetch(serverPubKeyFullPath);
+    } catch (e) {
+        return { err: 'Ошибка получения данных' };
+    }
+
     return await response.json();
 }
 
@@ -56,7 +61,10 @@ async function fetchOrder() {
 async function fetchNames() {
     console.log('names')
     const result = await fetchFromDb(namesFullPath);
-    console.log(result)
+
+    if (result.err)
+        return result;
+
     const data = result.data;
     const iterableData = Object.entries(data);
     const sortedData = iterableData.sort((fst, snd) => fst[1].localeCompare(snd[1]));
@@ -68,22 +76,26 @@ async function fetchNames() {
 async function fetchGroups() {
     console.log('groups')
     const result = await fetchFromDb(groupsFullPath);
-    const data = result.data;
+    const data = !result.err ? result.data : result;
 
     return data;
 }
 
 // fetchFromDb :: String -> Object
 async function fetchFromDb(fullPath) {
-    const payload = await encryptApiKey(getServerPub().pub, config.shared);
-    const response = await fetch(fullPath, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json' 
-        },
-        body: JSON.stringify({ payload })
-    });
+    try {
+        const payload = await encryptApiKey(getServerPub().pub, config.shared);
+        var response = await fetch(fullPath, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ payload })
+        });
+    } catch (e) {
+        return { err: 'Ошибка получения данных' }
+    }
 
     return await response.json();
 }

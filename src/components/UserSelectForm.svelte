@@ -14,20 +14,22 @@ Copyright (C) 2022 Timofey Chuchkanov
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <script>
-    import { UserType } from '../shared/const.js';
-    import { createEventDispatcher, onMount } from 'svelte';
+    import { UserType } from "../shared/const.js";
+    import { createEventDispatcher, onMount } from "svelte";
 
     const dispatch = createEventDispatcher();
-    const defaultEntityPlaceholder = '---';
+    const defaultEntityPlaceholder = "---";
 
     export let groups = [];
     export let names = [];
     export let currentEntityToShow = defaultEntityPlaceholder;
     export let currentUserType = UserType.student;
 
-    $: groupsSorted = groups ? groups.sort((l, r) => l.localeCompare(r, 'ru', { numeric: true })) : [];
+    $: groupsSorted =
+        groups && typeof groups.err == "undefined"
+            ? groups.sort((l, r) => l.localeCompare(r, "ru", { numeric: true }))
+            : [];
     $: checkedUserType = currentUserType;
     $: placeholder = currentEntityToShow;
 
@@ -35,32 +37,37 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // switchPlaceholderToDefaultIfUserTypeIs :: Number -> Undefined
     function switchPlaceholderToDefaultIfUserTypeIs(type) {
-        if (currentUserType == type)
-            placeholder = defaultEntityPlaceholder;
-        else
-            placeholder = currentEntityToShow;
+        if (currentUserType == type) placeholder = defaultEntityPlaceholder;
+        else placeholder = currentEntityToShow;
     }
 
     // dispatchUserSelect :: -> Undefined
     function dispatchUserSelect() {
-        dispatch('userSelect', {
+        dispatch("userSelect", {
             checkedUserType,
-            entity
+            entity,
         });
     }
 
     // setUserType :: Event -> Undefined
     function setUserType(event) {
         const target = event.target;
-        
+
         if (target.checked) {
-            checkedUserType = target.name == 'student' ? UserType.student : UserType.teacher;
+            checkedUserType =
+                target.name == "student" ? UserType.student : UserType.teacher;
         }
     }
 
-    function resetEntity() { entity = ''; }
+    function resetEntity() {
+        entity = "";
+    }
 
-    function onRadioButtonChange(e) { setUserType(e);  resetEntity(); dispatchUserSelect(); }
+    function onRadioButtonChange(e) {
+        setUserType(e);
+        resetEntity();
+        dispatchUserSelect();
+    }
 
     onMount(() => dispatchUserSelect());
 </script>
@@ -69,50 +76,86 @@ Copyright (C) 2022 Timofey Chuchkanov
     <form on:submit|preventDefault>
         <section id="select-user-type">
             <h2>Выберите тип пользователя</h2>
-    
+
             <div class="userTypeSelector">
                 <label for="student">Студент</label>
-                <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.teacher); onRadioButtonChange(e) } } 
-                       type="radio" id="student" name="student" checked={ checkedUserType == UserType.student }>
+                <input
+                    on:change={(e) => {
+                        switchPlaceholderToDefaultIfUserTypeIs(
+                            UserType.teacher
+                        );
+                        onRadioButtonChange(e);
+                    }}
+                    type="radio"
+                    id="student"
+                    name="student"
+                    checked={checkedUserType == UserType.student}
+                />
             </div>
-    
+
             <div class="userTypeSelector">
                 <label for="teacher">Преподаватель</label>
-                <input on:change={ e => { switchPlaceholderToDefaultIfUserTypeIs(UserType.student); onRadioButtonChange(e) } } 
-                    type="radio" id="teacher" name="teacher" checked={ checkedUserType == UserType.teacher }>
+                <input
+                    on:change={(e) => {
+                        switchPlaceholderToDefaultIfUserTypeIs(
+                            UserType.student
+                        );
+                        onRadioButtonChange(e);
+                    }}
+                    type="radio"
+                    id="teacher"
+                    name="teacher"
+                    checked={checkedUserType == UserType.teacher}
+                />
             </div>
         </section>
         <section id="select-entity">
             {#if checkedUserType == 1}
-                <h2>Выберите  группу</h2>
-    
-                <div class="select-container">
-                    <select required bind:value={ entity } on:change={ dispatchUserSelect }>
-                        <option value="">{ placeholder }</option>
-                        {#each groupsSorted as group}
-                            <option value={ group }>{ group }</option>
-                        {/each}
-                    </select>
+                <h2>Выберите группу</h2>
 
-                    <p class="select-arrow">⌄</p>
+                <div class="select-container">
+                    {#if groups.err}
+                        <p class="error">{groups.err}</p>
+                    {:else}
+                        <select
+                            required
+                            bind:value={entity}
+                            on:change={dispatchUserSelect}
+                        >
+                            <option value="">{placeholder}</option>
+                            {#each groupsSorted as group}
+                                <option value={group}>{group}</option>
+                            {/each}
+                        </select>
+
+                        <p class="select-arrow">⌄</p>
+                    {/if}
                 </div>
             {:else}
-                <h2>Выберите  преподавателя</h2>
+                <h2>Выберите преподавателя</h2>
 
                 <div class="select-container">
-                    <select required bind:value={ entity } on:change={ dispatchUserSelect }>
-                        <option value="">{ placeholder }</option>
-                        {#each names as name}
-                            <option value={ name[0] }>{ name[1] }</option>
-                        {/each}
-                    </select>
+                    {#if names.err}
+                        <p class="error">{names.err}</p>
+                    {:else}
+                        <select
+                            required
+                            bind:value={entity}
+                            on:change={dispatchUserSelect}
+                        >
+                            <option value="">{placeholder}</option>
+                            {#each names as name}
+                                <option value={name[0]}>{name[1]}</option>
+                            {/each}
+                        </select>
 
-                    <p class="select-arrow">⌄</p>
+                        <p class="select-arrow">⌄</p>
+                    {/if}
                 </div>
             {/if}
         </section>
-    
-        <slot></slot>
+
+        <slot />
     </form>
 </div>
 
@@ -158,7 +201,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     select:hover {
-        cursor: pointer
+        cursor: pointer;
     }
 
     div.userTypeSelector {
@@ -183,7 +226,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         place-items: center;
     }
 
-    @media not all and (min-resolution:.001dpcm) { 
+    @media not all and (min-resolution: 0.001dpcm) {
         select + p.select-arrow {
             transform: translateY(-60%);
         }

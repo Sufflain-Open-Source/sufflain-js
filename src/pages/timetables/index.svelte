@@ -14,18 +14,17 @@ Copyright (C) 2022 Timofey Chuchkanov
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <script>
-    import PageMetaTitle from '../../components/PageMetaTitle.svelte';
-    import { fetchOrder } from '../../data/remote.js';
-    import { getTimetables } from '../../data/session.js';
-    import LinkCard from '../../components/LinkCard.svelte';
-    import { requestTimetablesEvent } from '../../events/custom-window-events.js';
-    import NavBar from '../../components/NavBar.svelte';
-    import LoadingIndicator from '../../components/LoadingIndicator.svelte';
-    import { url } from '@roxi/routify';
-    import { onMount } from 'svelte';
-    
+    import PageMetaTitle from "../../components/PageMetaTitle.svelte";
+    import { fetchOrder } from "../../data/remote.js";
+    import { getTimetables } from "../../data/session.js";
+    import LinkCard from "../../components/LinkCard.svelte";
+    import { requestTimetablesEvent } from "../../events/custom-window-events.js";
+    import NavBar from "../../components/NavBar.svelte";
+    import LoadingIndicator from "../../components/LoadingIndicator.svelte";
+    import { url } from "@roxi/routify";
+    import { onMount } from "svelte";
+
     let isNothingToShow = false;
     let timetables;
     let postsOrder;
@@ -43,22 +42,29 @@ Copyright (C) 2022 Timofey Chuchkanov
         if (timetables == [] || areAllTimetablesLessonsEmpty(timetables))
             isNothingToShow = true;
 
-        console.log('fetch and set')
-        console.log(isNothingToShow)
-        console.log(timetables)
+        console.log("fetch and set");
+        console.log(isNothingToShow);
+        console.log(timetables);
+        console.log(timetables[0][0]);
     }
 
     // sortTimetablesByTimePosted :: [Object] Object -> Undefined
     function sortTimetablesByTimePosted(timetables, postsOrder) {
         timetables.sort((first, second) => {
-            const firstTimetableOrder = getTimetableOrderByHash(first, postsOrder);
-            const secondTimetableOrder = getTimetableOrderByHash(second, postsOrder);
+            const firstTimetableOrder = getTimetableOrderByHash(
+                first,
+                postsOrder
+            );
+            const secondTimetableOrder = getTimetableOrderByHash(
+                second,
+                postsOrder
+            );
 
-            return firstTimetableOrder - secondTimetableOrder; 
+            return firstTimetableOrder - secondTimetableOrder;
         });
     }
 
-    // getTimetableOrderByHash :: Object Object -> Number 
+    // getTimetableOrderByHash :: Object Object -> Number
     function getTimetableOrderByHash(timetable, postsOrder) {
         return postsOrder[timetable[0]];
     }
@@ -72,37 +78,42 @@ Copyright (C) 2022 Timofey Chuchkanov
     function areTimetableLessonsEmpty(timetable) {
         let lessons = [];
 
-        if (timetable[1].lessons)
-            lessons = timetable[1].lessons;
-        
-        if (timetable[1].data)
-            lessons = timetable[1].data;
+        if (timetable[1].lessons) lessons = timetable[1].lessons;
+
+        if (timetable[1].data) lessons = timetable[1].data;
 
         return lessons.length <= 0 ? true : false;
     }
 </script>
 
-<svelte:window on:timetablesloaded={ fetchAndSetData } />
+<svelte:window on:timetablesloaded={fetchAndSetData} />
 
 <NavBar />
-<PageMetaTitle title='Sufflain | Расписание занятий' />
+<PageMetaTitle title="Sufflain | Расписание занятий" />
 
 {#if !timetables}
     <LoadingIndicator />
 {:else if isNothingToShow}
-    <p id="nothing-to-show" >Здесь нечего показывать.</p>
+    {#if timetables[0][0] == "err"}
+        <p class="error">{timetables[0][1]}</p>
+    {:else}
+        <p id="nothing-to-show">Здесь нечего показывать.</p>
+    {/if}
 {:else if timetables}
     <div class="cards-container">
         {#each timetables as timetable}
             {#if !areTimetableLessonsEmpty(timetable)}
-                <LinkCard title={ timetable[1].linkTitle } link={ $url(`./${ timetable[0] }`) }/>
+                <LinkCard
+                    title={timetable[1].linkTitle}
+                    link={$url(`./${timetable[0]}`)}
+                />
             {/if}
         {/each}
     </div>
 {/if}
 
 <style>
-    p#nothing-to-show {
+    p#nothing-to-show, .error {
         display: inline-block;
         text-align: center;
         position: absolute;

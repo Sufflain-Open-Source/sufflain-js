@@ -69,7 +69,10 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // getCurrentEntityToShow :: -> String or Undefined
     function getCurrentEntityToShow() {
-        if (currentName) return names.find((usr) => usr[0] == currentName)[1];
+        if (!names.err) {
+            if (currentName)
+                return names.find((usr) => usr[0] == currentName)[1];
+        }
 
         if (currentGroup) return currentGroup;
     }

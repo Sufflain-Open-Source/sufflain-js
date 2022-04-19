@@ -31,7 +31,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     onMount(async function() {
             groups = await fetchGroups(); 
-            names = await fetchNames(); 
+            names = await fetchNames();
     });
 
     // extractEventDetail :: Event -> Undefined

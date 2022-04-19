@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "apimon": "nodemon --exec babel-node api/main.js",
+        "dev-no-api": "run-p dev:*",
         "dev": "run-p dev:* apimon",
         "dev:routify": "routify -b",
         "dev:vite": "vite --host 0.0.0.0",
