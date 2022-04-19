@@ -10,7 +10,9 @@
         "dev:vite": "vite --host 0.0.0.0",
         "preview": "vite preview",
         "build": "rm -rf dist && routify -b && vite build && javascript-obfuscator --output dist dist",
-        "build-sirv": "npm run build && cd dist && sirv -s"
+        "build-sirv": "npm run build && cd dist && sirv -s",
+        "prod:sirv": "cd dist && sirv -s --host 0.0.0.0",
+        "prod": "run-p apimon prod:sirv"
     },
     "devDependencies": {
         "@roxi/routify": "^2.18.4",
