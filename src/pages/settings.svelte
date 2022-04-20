@@ -24,7 +24,6 @@ Copyright (C) 2022 Timofey Chuchkanov
     import PageMetaTitle from "../components/PageMetaTitle.svelte";
     import { saveEntity } from "../util/entity_operations.js";
     import NavBar from "../components/NavBar.svelte";
-    import Button from "../components/Button.svelte";
     import Footer from "../components/Footer.svelte";
     import { onMount } from "svelte";
 
@@ -105,7 +104,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     >
         <div class="delete-data-container">
             <p on:click={clearStorageOnConfirm} class="delete-data">
-                Удалить сохраненные данные
+                Удалить сохраненные настройки
             </p>
             <p class="tooltip">?</p>
         </div>
@@ -118,7 +117,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <style>
     .tooltip:hover::after {
-        content: 'Используйте эту кнопку в случае прекращения использования нашего приложения.';
+        content: 'Не хотите больше использовать Sufflain? Удалите ненужные данные.';
         position: absolute;
         bottom: 4ch;
         right: 0;
@@ -126,7 +125,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         background-color: var(--light-blue);
         padding: 10px 20px;
         border-radius: 1.1rem;
-        box-shadow: var(--default-shadow);
+        box-shadow: 0px 1px 16px rgba(0, 0, 0, .3);
     }
 
     .tooltip:hover {
