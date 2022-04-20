@@ -34,7 +34,11 @@ Copyright (C) 2022 Timofey Chuchkanov
         }
     };
 
-    if (!group && !name) {
+    if ($route.shortPath == '') {
+        $redirect('/welcome')
+    }
+
+    if ((!group && !name) && $route.shortPath != '/welcome') {
         $redirect('/welcome');
     }
 
