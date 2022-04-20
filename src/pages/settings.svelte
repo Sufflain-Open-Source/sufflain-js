@@ -141,12 +141,13 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     .delete-data-container {
-        align-items: center;
         display: flex;
+        align-items: center;
         gap: 2rem;
     }
 
     .delete-data {
+        text-align: center;
         text-decoration: underline;
     }
     .delete-data:hover {
