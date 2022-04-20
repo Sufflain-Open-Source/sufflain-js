@@ -20,11 +20,6 @@
         background-color: var(--light-blue);
     }
 
-    button.tertiaryButton {
-        color: var(--light-blue);
-        background-color: var(--medium-red);
-    }
-
     button:hover {
         background: none;
         cursor: pointer;

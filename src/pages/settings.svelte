@@ -103,14 +103,55 @@ Copyright (C) 2022 Timofey Chuchkanov
         currentUserType={inferredUserType}
         {currentEntityToShow}
     >
-        <Button
-            onClick={clearStorageOnConfirm}
-            buttonsClass="tertiaryButton"
-            text="Удалить сохраненные данные"
-        />
+        <div class="delete-data-container">
+            <p on:click={clearStorageOnConfirm} class="delete-data">
+                Удалить сохраненные данные
+            </p>
+            <p class="tooltip">?</p>
+        </div>
     </UserSelectForm>
 {:else}
     <LoadingIndicator />
 {/if}
 
 <Footer appVersion="2.0 Domestic Dante (alpha1)" />
+
+<style>
+    .tooltip:hover::after {
+        content: 'Используйте эту кнопку в случае прекращения использования нашего приложения.';
+        position: absolute;
+        bottom: 4ch;
+        right: 0;
+        width: 200px;
+        background-color: var(--light-blue);
+        padding: 10px 20px;
+        border-radius: 1.1rem;
+        box-shadow: var(--default-shadow);
+    }
+
+    .tooltip:hover {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .tooltip {
+        padding: 5px 10px;
+        border-radius: 1.1rem;
+        box-shadow: var(--default-shadow);
+        background-color: var(--light-blue);
+    }
+
+    .delete-data-container {
+        align-items: center;
+        display: flex;
+        gap: 2rem;
+    }
+
+    .delete-data {
+        text-decoration: underline;
+    }
+    .delete-data:hover {
+        color: var(--medium-red);
+        cursor: pointer;
+    }
+</style>
