@@ -1,6 +1,6 @@
 <script>
     import { redirect } from '@roxi/routify';
 
-    $redirect('/timetables');
+    $redirect('/welcome');
     window.location.reload();
 </script>
