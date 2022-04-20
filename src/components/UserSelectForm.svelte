@@ -77,7 +77,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         <section id="select-user-type">
             <h2>Выберите тип пользователя</h2>
 
-            <div class="userTypeSelector">
+            <div class="user-type-selector">
                 <label for="student">Студент</label>
                 <input
                     on:change={(e) => {
@@ -93,7 +93,7 @@ Copyright (C) 2022 Timofey Chuchkanov
                 />
             </div>
 
-            <div class="userTypeSelector">
+            <div class="user-type-selector">
                 <label for="teacher">Преподаватель</label>
                 <input
                     on:change={(e) => {
@@ -204,14 +204,14 @@ Copyright (C) 2022 Timofey Chuchkanov
         cursor: pointer;
     }
 
-    div.userTypeSelector {
+    div.user-type-selector {
         display: flex;
         flex-direction: row-reverse;
         margin-bottom: 1rem;
         justify-content: flex-end;
     }
 
-    .userTypeSelector *:hover {
+    .user-type-selector *:hover {
         cursor: pointer;
     }
 

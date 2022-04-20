@@ -1,9 +1,9 @@
-<div class="loadingContainer">
-    <div class="loadingIndicator"></div>
+<div class="loading-container">
+    <div class="loading-indicator"></div>
 </div>
 
 <style>
-    div.loadingContainer {
+    div.loading-container {
         display: grid;
         place-items: center;
         height: 100vh;
@@ -14,7 +14,7 @@
         transform: translate(-50%, -50%);
     }
 
-    div.loadingIndicator {
+    div.loading-indicator {
         height: 40px;
         width: 40px;
         background-repeat: no-repeat;

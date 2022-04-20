@@ -4,7 +4,7 @@
 </script>
 
 <div class="group-table" 
-     class:withBackground={ typeof title == 'undefined' ? false : true }>
+     class:with-background={ typeof title == 'undefined' ? false : true }>
     {#if title}
         <p class="group-table-title">{ title }</p>
     {/if}
@@ -21,7 +21,7 @@
         border-radius: 1.11rem;
     }
 
-    .withBackground {
+    .with-background {
         background-color: var(--light-blue);
         box-shadow: var(--default-shadow);
     }
