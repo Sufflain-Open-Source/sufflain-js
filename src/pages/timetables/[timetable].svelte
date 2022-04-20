@@ -14,82 +14,85 @@ Copyright (C) 2022 Timofey Chuchkanov
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <script>
-    import { getTimetables } from '../../data/session.js';
-    import { requestTimetablesEvent } from '../../events/custom-window-events.js';
-    import { onMount } from 'svelte';
-    import { putAllGroupsLessonsTogether, groupLessonsWithSameTime } from '../../util/timetables_alteration.js';
-    import { getName } from '../../data/local.js';
-    import GroupTable from '../../components/GroupTable.svelte';
-    import NotFound from '../../components/NotFound.svelte';
-    import NavBar from '../../components/NavBar.svelte';
+    import { getTimetables } from "../../data/session.js";
+    import { requestTimetablesEvent } from "../../events/custom-window-events.js";
+    import { onMount } from "svelte";
+    import {
+        putAllGroupsLessonsTogether,
+        groupLessonsWithSameTime,
+    } from "../../util/timetables_alteration.js";
+    import { getName } from "../../data/local.js";
+    import GroupTable from "../../components/GroupTable.svelte";
+    import NotFound from "../../components/NotFound.svelte";
+    import NavBar from "../../components/NavBar.svelte";
 
     const path = window.location.pathname;
-    const timetableHash = path.substring(path.lastIndexOf('/')).replace('/', '');
+    const timetableHash = path
+        .substring(path.lastIndexOf("/"))
+        .replace("/", "");
     const name = getName();
 
-    let isNotFound = false;
-
-    let timetables;
+    let timetables = getTimetables();
+    let isNotFound = !isHashPresentInTimetables(timetableHash, timetables);
     let selectedTimetable;
     let restructuredTimetable;
 
-    onMount(() => { 
-        if (!timetables) {
-            dispatchEvent(requestTimetablesEvent); 
-        }
+    onMount(() => {
+        if (!timetables) dispatchEvent(requestTimetablesEvent);
+
+        setTimetablesToFetched();
     });
 
     function setTimetablesToFetched() {
-        timetables = getTimetables();
-        const isHashPresent = isHashPresentInTimetables(timetableHash, timetables)
+        if (!isNotFound) {
+            selectedTimetable = timetables.find(
+                (table) => table[0] == timetableHash
+            );
 
-        if (!timetables || !isHashPresent) {
-            isNotFound = true;
-            return;
+            document.title = `Sufflain | ${selectedTimetable[1].linkTitle}`;
+
+            if (name)
+                restructuredTimetable = groupLessonsWithSameTime(
+                    putAllGroupsLessonsTogether(selectedTimetable)
+                );
+
+            if (!name) sortLessonsByTime(selectedTimetable[1].lessons, false);
+            else sortLessonsByTime(restructuredTimetable, true);
         }
-
-        selectedTimetable = timetables.find(table => table[0] == timetableHash);
-        document.title = `Sufflain | ${ selectedTimetable[1].linkTitle }`;
-
-        if (name) restructuredTimetable = groupLessonsWithSameTime(putAllGroupsLessonsTogether(selectedTimetable));
-
-        if (!name) 
-            sortLessonsByTime(selectedTimetable[1].lessons, false);
-        else
-            sortLessonsByTime(restructuredTimetable, true);
     }
 
     // sortLessonsByTime :: [String] Boolean -> Undefined
     // Sort timetable lessons by their time in ascending order.
     function sortLessonsByTime(lessons, isTableRestrucured) {
-        (!isTableRestrucured ? () => lessons.sort((l, r) => l.time.localeCompare(r.time)) 
-                             : () => lessons.sort((l, r) => {
-                                         const lLessonsTime = l[0].time;
-                                         const rLessonsTime = r[0].time;
+        (!isTableRestrucured
+            ? () => lessons.sort((l, r) => l.time.localeCompare(r.time))
+            : () =>
+                  lessons.sort((l, r) => {
+                      const lLessonsTime = l[0].time;
+                      const rLessonsTime = r[0].time;
 
-                                         return lLessonsTime.localeCompare(rLessonsTime);
-                                     }))();
+                      return lLessonsTime.localeCompare(rLessonsTime);
+                  }))();
     }
 
     // isHashPresentInTimetables :: String [Object] -> Boolean
     function isHashPresentInTimetables(hash, tables) {
-        const foundHash = tables.find(table => table[0] == hash);
+        if (tables == null || tables == undefined) return false;
 
-        return typeof foundHash == 'undefined' ? false : true;
+        const foundHash = tables.find((table) => table[0] == hash);
+        return foundHash ? true : false;
     }
 </script>
 
-
-<svelte:window on:timetablesloaded={ setTimetablesToFetched } />
+<svelte:window on:timetablesloaded={ () => window.location.reload() } />
 
 {#if !isNotFound}
     <NavBar />
 
     <div class="table-container">
         {#if selectedTimetable && !restructuredTimetable}
-            <h2 id="group-title">{ selectedTimetable[1].title }</h2>
+            <h2 id="group-title">{selectedTimetable[1].title}</h2>
         {/if}
 
         <table>
@@ -101,26 +104,29 @@ Copyright (C) 2022 Timofey Chuchkanov
             </thead>
             {#if restructuredTimetable}
                 {#each restructuredTimetable as lesson}
-                        <tr>
-                            <td>{ lesson[0].time }</td>
-                            <td>
-                                {#each lesson as groupLesson}
-                                    <GroupTable title={ groupLesson.title } data={ groupLesson.data } />
-                                {/each}
-                            </td>
-                    </tr>
-                {/each}
-           {/if}
-           {#if selectedTimetable && !restructuredTimetable}
-              {#each selectedTimetable[1].lessons as lesson}
                     <tr>
-                        <td>{ lesson.time }</td>
+                        <td>{lesson[0].time}</td>
                         <td>
-                            <GroupTable data={ lesson.data } />
+                            {#each lesson as groupLesson}
+                                <GroupTable
+                                    title={groupLesson.title}
+                                    data={groupLesson.data}
+                                />
+                            {/each}
                         </td>
                     </tr>
                 {/each}
-          {/if}
+            {/if}
+            {#if selectedTimetable && !restructuredTimetable}
+                {#each selectedTimetable[1].lessons as lesson}
+                    <tr>
+                        <td>{lesson.time}</td>
+                        <td>
+                            <GroupTable data={lesson.data} />
+                        </td>
+                    </tr>
+                {/each}
+            {/if}
         </table>
     </div>
 {:else}
@@ -131,8 +137,8 @@ Copyright (C) 2022 Timofey Chuchkanov
     .table-container {
         display: grid;
         place-items: center;
-        padding-top: .5rem;
-        margin: auto .5rem;
+        padding-top: 0.5rem;
+        margin: auto 0.5rem;
     }
 
     table {
@@ -152,7 +158,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     tr:nth-child(even) {
-        background-color: rgba(132, 207, 255, .2);
+        background-color: rgba(132, 207, 255, 0.2);
     }
 
     tr:nth-child(1) {
@@ -162,10 +168,10 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     h2#group-title {
         text-align: center;
-        padding: .5rem .5rem;
-        margin-bottom: .5rem;
+        padding: 0.5rem 0.5rem;
+        margin-bottom: 0.5rem;
         border-radius: 1.11rem;
-        background-color: rgba(254, 133, 153, .4);
+        background-color: rgba(254, 133, 153, 0.4);
     }
 
     @media (min-width: 820px) {
