@@ -182,7 +182,7 @@ Copyright (C) 2022 Timofey Chuchkanov
         background-color: var(--light-blue);
         border-style: none;
         border-radius: 1.11rem;
-        padding: 20px 20px;
+        padding: 20px 30px 20px 20px;
         box-shadow: var(--default-shadow);
         color: var(--dark-red);
     }
