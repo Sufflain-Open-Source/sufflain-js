@@ -19,6 +19,7 @@
     .group-table {
         width: 168.281px;
         border-radius: 1.11rem;
+        overflow-wrap: break-word;
     }
 
     .with-background {
