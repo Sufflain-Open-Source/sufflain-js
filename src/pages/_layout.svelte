@@ -34,22 +34,11 @@ Copyright (C) 2022 Timofey Chuchkanov
         }
     };
 
-    if ($route.shortPath == '') {
-        $redirect('/welcome')
-    }
-
-    if ((!group && !name) && $route.shortPath != '/welcome') {
-        $redirect('/welcome');
-    }
-
-    if (isRedirectFromWelcomePageNeeded())
+    if ((name || group) && ($route.shortPath == '/welcome' || window.location.pathname == '/'))
         $redirect('/timetables');
 
-    function isRedirectFromWelcomePageNeeded() {
-        if (typeof group == 'string' || typeof name == 'string') {
-            return $route.shortPath == '/welcome'
-        } 
-    }
+    if (!(name || group) && $route.shortPath != '/welcome')
+        $redirect('/welcome')
 </script>
 
 <slot></slot>
