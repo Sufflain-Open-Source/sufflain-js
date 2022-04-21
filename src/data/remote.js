@@ -77,6 +77,8 @@ async function fetchGroups() {
 
 // fetchFromDb :: String -> Object
 async function fetchFromDb(fullPath) {
+    const error = { err: 'Ошибка получения данных' };
+    
     try {
         const payload = await encryptApiKey(getServerPub().pub, config.shared);
         var response = await fetch(fullPath, {
@@ -88,8 +90,11 @@ async function fetchFromDb(fullPath) {
             body: JSON.stringify({ payload })
         });
     } catch (e) {
-        return { err: 'Ошибка получения данных' }
+        return error;
     }
+
+    if (!response.ok)
+        return error;
 
     return await response.json();
 }

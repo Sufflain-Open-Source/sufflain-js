@@ -89,10 +89,10 @@ Copyright (C) 2022 Timofey Chuchkanov
 {#if !timetables}
     <LoadingIndicator />
 {:else if isNothingToShow}
-    {#if timetables[0][0] == "err"}
-        <p class="error">{timetables[0][1]}</p>
-    {:else}
+    {#if Object.keys(timetables).length == 0}
         <p id="nothing-to-show">Здесь нечего показывать.</p>
+    {:else if timetables[0][0] == "err"}
+        <p class="error">{timetables[0][1]}</p>
     {/if}
 {:else if timetables}
     <div class="cards-container">
@@ -108,7 +108,8 @@ Copyright (C) 2022 Timofey Chuchkanov
 {/if}
 
 <style>
-    p#nothing-to-show, .error {
+    p#nothing-to-show,
+    .error {
         display: inline-block;
         text-align: center;
         position: absolute;
