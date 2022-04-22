@@ -113,7 +113,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     <LoadingIndicator />
 {/if}
 
-<Footer appVersion="2.0 Domestic Dante (alpha1)" />
+<Footer appVersion="2.0 Domestic Dante (alpha2)" />
 
 <style>
     .tooltip:hover::after {

@@ -26,6 +26,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import GroupTable from "../../components/GroupTable.svelte";
     import NotFound from "../../components/NotFound.svelte";
     import NavBar from "../../components/NavBar.svelte";
+    import LoadingIndicator from "../../components/LoadingIndicator.svelte";
 
     const path = window.location.pathname;
     const timetableHash = path
@@ -34,7 +35,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     const name = getName();
 
     let timetables = getTimetables();
-    let isNotFound = !isHashPresentInTimetables(timetableHash, timetables);
+    let isHashPresent = isHashPresentInTimetables(timetableHash, timetables);
+    let isNotFound =
+        typeof isHashPresent == "boolean" ? !isHashPresent : isHashPresent;
     let selectedTimetable;
     let restructuredTimetable;
 
@@ -78,14 +81,14 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     // isHashPresentInTimetables :: String [Object] -> Boolean
     function isHashPresentInTimetables(hash, tables) {
-        if (tables == null || tables == undefined) return false;
+        if (tables == null || tables == undefined) return "loading";
 
         const foundHash = tables.find((table) => table[0] == hash);
         return foundHash ? true : false;
     }
 </script>
 
-<svelte:window on:timetablesloaded={ () => window.location.reload() } />
+<svelte:window on:timetablesloaded={() => window.location.reload()} />
 
 {#if !isNotFound}
     <NavBar />
@@ -129,6 +132,8 @@ Copyright (C) 2022 Timofey Chuchkanov
             {/if}
         </table>
     </div>
+{:else if isNotFound == "loading"}
+    <LoadingIndicator />
 {:else}
     <NotFound />
 {/if}
