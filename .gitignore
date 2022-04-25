@@ -6,3 +6,4 @@ tags
 api-config.js
 cli-config.js
 !template/*
+private/
