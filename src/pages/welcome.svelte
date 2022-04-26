@@ -14,24 +14,26 @@ Copyright (C) 2022 Timofey Chuchkanov
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <script>
-    import { fetchGroups, fetchNames } from '../data/remote.js';
-    import LoadingIndicator from '../components/LoadingIndicator.svelte';
-    import UserSelectForm from '../components/UserSelectForm.svelte';
-    import PageMetaTitle from '../components/PageMetaTitle.svelte';
-    import Button from '../components/Button.svelte';
-    import { saveEntity } from '../util/entity_operations.js';
-    import { onMount }  from 'svelte';
-    import { goto } from '@roxi/routify';
+    import { fetchGroups, fetchNames } from "../data/remote.js";
+    import LoadingIndicator from "../components/LoadingIndicator.svelte";
+    import UserSelectForm from "../components/UserSelectForm.svelte";
+    import PageMetaTitle from "../components/PageMetaTitle.svelte";
+    import Button from "../components/Button.svelte";
+    import { saveEntity } from "../util/entity_operations.js";
+    import { onMount } from "svelte";
+    import { goto } from "@roxi/routify";
+    import { makePageTitle } from "../util/strings.js";
+
+    const title = makePageTitle("Добро пожаловать");
 
     let detail;
     let groups;
     let names;
 
-    onMount(async function() {
-            groups = await fetchGroups(); 
-            names = await fetchNames();
+    onMount(async function () {
+        groups = await fetchGroups();
+        names = await fetchNames();
     });
 
     // extractEventDetail :: Event -> Undefined
@@ -43,24 +45,28 @@ Copyright (C) 2022 Timofey Chuchkanov
     function saveSelectedEntity() {
         if (detail.entity) {
             saveEntity(detail);
-            $goto('/timetables');
+            $goto("/timetables");
         }
     }
 </script>
 
-<PageMetaTitle title='Sufflain | Добро пожаловать' />
+<PageMetaTitle {title} />
 
 {#if groups || names}
-    <UserSelectForm on:userSelect={ extractEventDetail }
-                    { names } 
-                    { groups }>
+    <UserSelectForm on:userSelect={extractEventDetail} {names} {groups}>
         <div class="form-button-container">
-            <Button onClick={ () => { document.querySelector('form').reportValidity() && saveSelectedEntity() } } 
-                    text="Продолжить" buttonsClass="mainButton" />
+            <Button
+                onClick={() => {
+                    document.querySelector("form").reportValidity() &&
+                        saveSelectedEntity();
+                }}
+                text="Продолжить"
+                buttonsClass="mainButton"
+            />
         </div>
-    </UserSelectForm> 
+    </UserSelectForm>
 {:else}
-    <LoadingIndicator></LoadingIndicator>
+    <LoadingIndicator />
 {/if}
 
 <style>

@@ -24,7 +24,10 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { saveEntity } from "../util/entity_operations.js";
     import NavBar from "../components/NavBar.svelte";
     import Footer from "../components/Footer.svelte";
+    import { makePageTitle } from "../util/strings";
     import { onMount } from "svelte";
+
+    const title = makePageTitle("Настройки");
 
     let currentName;
     let currentGroup;
@@ -85,7 +88,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <NavBar />
 
-<PageMetaTitle title="Sufflain | Настройки" />
+<PageMetaTitle {title} />
 
 {#if groups || names}
     <UserSelectForm

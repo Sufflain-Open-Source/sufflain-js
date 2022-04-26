@@ -27,6 +27,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import NotFound from "../../components/NotFound.svelte";
     import NavBar from "../../components/NavBar.svelte";
     import LoadingIndicator from "../../components/LoadingIndicator.svelte";
+    import { makePageTitle } from "../../util/strings";
     import { metatags } from "@roxi/routify";
 
     const path = window.location.pathname;
@@ -43,8 +44,8 @@ Copyright (C) 2022 Timofey Chuchkanov
     let restructuredTimetable;
 
     $: title = selectedTimetable
-        ? `Sufflain | ${selectedTimetable[1].linkTitle}`
-        : `Sufflain | Не найдено`;
+        ? makePageTitle(selectedTimetable[1].linkTitle)
+        : makePageTitle("Не найдено");
 
     $: {
         metatags.title = title;

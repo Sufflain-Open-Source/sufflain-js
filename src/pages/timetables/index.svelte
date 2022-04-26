@@ -25,6 +25,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     import Button from "../../components/Button.svelte";
     import { url } from "@roxi/routify";
     import { onMount } from "svelte";
+    import { makePageTitle } from "../../util/strings";
+
+    const title = makePageTitle("Расписание занятий");
 
     let isNothingToShow = false;
     let timetables;
@@ -85,7 +88,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 <svelte:window on:timetablesloaded={fetchAndSetData} />
 
 <NavBar />
-<PageMetaTitle title="Sufflain | Расписание занятий" />
+<PageMetaTitle {title} />
 
 {#if !timetables}
     <LoadingIndicator />
