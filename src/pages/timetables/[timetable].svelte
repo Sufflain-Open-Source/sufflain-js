@@ -27,6 +27,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import NotFound from "../../components/NotFound.svelte";
     import NavBar from "../../components/NavBar.svelte";
     import LoadingIndicator from "../../components/LoadingIndicator.svelte";
+    import { metatags } from "@roxi/routify";
 
     const path = window.location.pathname;
     const timetableHash = path
@@ -41,6 +42,14 @@ Copyright (C) 2022 Timofey Chuchkanov
     let selectedTimetable;
     let restructuredTimetable;
 
+    $: title = selectedTimetable
+        ? `Sufflain | ${selectedTimetable[1].linkTitle}`
+        : `Sufflain | Не найдено`;
+
+    $: {
+        metatags.title = title;
+    }
+
     onMount(() => {
         if (!timetables) dispatchEvent(requestTimetablesEvent);
 
@@ -52,8 +61,6 @@ Copyright (C) 2022 Timofey Chuchkanov
             selectedTimetable = timetables.find(
                 (table) => table[0] == timetableHash
             );
-
-            document.title = `Sufflain | ${selectedTimetable[1].linkTitle}`;
 
             if (name)
                 restructuredTimetable = groupLessonsWithSameTime(
