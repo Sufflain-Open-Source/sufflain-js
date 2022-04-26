@@ -18,7 +18,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 import { setName, setGroup, removeName, removeGroup } from '../data/local.js';
 import { UserType } from '../shared/const.js';
 
-// saveEntity :: Object -> Undefined
+// saveEntity :: Object -> Boolean
 function saveEntity({ checkedUserType, entity }) {
     if (entity.trim() != '') {
         if (checkedUserType == UserType.student) {
@@ -28,7 +28,11 @@ function saveEntity({ checkedUserType, entity }) {
             setName(entity);
             removeGroup();
         }
+
+        return true;
     }
+
+    return false
 }
 
 export { saveEntity };

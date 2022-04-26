@@ -25,6 +25,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     export let names = [];
     export let currentEntityToShow = defaultEntityPlaceholder;
     export let currentUserType = UserType.student;
+    export let dispatchUserSelectOnMount = true;
 
     $: groupsSorted =
         groups && typeof groups.err == "undefined"
@@ -69,7 +70,9 @@ Copyright (C) 2022 Timofey Chuchkanov
         dispatchUserSelect();
     }
 
-    onMount(() => dispatchUserSelect());
+    onMount(() => {
+        if (dispatchUserSelectOnMount) dispatchUserSelect();
+    });
 </script>
 
 <div class="form-container">
@@ -225,6 +228,10 @@ Copyright (C) 2022 Timofey Chuchkanov
         display: grid;
         place-items: center;
         padding-bottom: calc(var(--nav-bar-height) * 2);
+    }
+
+    #select-entity {
+        position: relative;
     }
 
     @media not all and (min-resolution: 0.001dpcm) {

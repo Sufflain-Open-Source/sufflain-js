@@ -82,3 +82,17 @@ h2 {
         padding: calc(var(--nav-bar-height) * 2) 0 calc(var(--nav-bar-height) * 2) 0;
     }
 }
+
+#select-entity.saved::after {
+    text-align: center;
+    content: "Изменения успешно применены.";
+    position: absolute;
+    bottom: 4ch;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    background-color: var(--light-blue);
+    padding: 10px 20px;
+    border-radius: 1.1rem;
+    box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.3);
+}
