@@ -22,6 +22,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { requestTimetablesEvent } from "../../events/custom-window-events.js";
     import NavBar from "../../components/NavBar.svelte";
     import LoadingIndicator from "../../components/LoadingIndicator.svelte";
+    import Button from "../../components/Button.svelte";
     import { url } from "@roxi/routify";
     import { onMount } from "svelte";
 
@@ -107,6 +108,14 @@ Copyright (C) 2022 Timofey Chuchkanov
     </div>
 {/if}
 
+<div class="fab-container">
+    <Button
+        onClick={() => window.open("https://t.me/painsufflain")}
+        buttonsClass="floating"
+        imagePath="img/telegram.svg"
+    />
+</div>
+
 <style>
     p#nothing-to-show,
     .error {
@@ -118,10 +127,20 @@ Copyright (C) 2022 Timofey Chuchkanov
         transform: translate(-50%, -50%);
     }
 
+    .fab-container {
+        position: fixed;
+        bottom: 17vh;
+        right: 5vw;
+    }
+
     @media (min-width: 550px) {
         .cards-container {
             display: grid;
             justify-content: center;
         }
+    }
+
+    .cards-container {
+        margin-bottom: 20vh;
     }
 </style>
