@@ -70,6 +70,17 @@ Copyright (C) 2022 Timofey Chuchkanov
         dispatchUserSelect();
     }
 
+    function onEntitySelect() {
+        dispatchUserSelect();
+        currentUserType = checkedUserType;
+        currentEntityToShow = getCurrentEntity();
+    }
+
+    function getCurrentEntity() {
+        const selected = document.querySelector("select");
+        return selected.options[selected.selectedIndex].text;
+    }
+
     onMount(() => {
         if (dispatchUserSelectOnMount) dispatchUserSelect();
     });
@@ -123,7 +134,7 @@ Copyright (C) 2022 Timofey Chuchkanov
                         <select
                             required
                             bind:value={entity}
-                            on:change={dispatchUserSelect}
+                            on:change={onEntitySelect}
                         >
                             <option value="">{placeholder}</option>
                             {#each groupsSorted as group}
@@ -144,7 +155,7 @@ Copyright (C) 2022 Timofey Chuchkanov
                         <select
                             required
                             bind:value={entity}
-                            on:change={dispatchUserSelect}
+                            on:change={onEntitySelect}
                         >
                             <option value="">{placeholder}</option>
                             {#each names as name}

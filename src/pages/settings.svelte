@@ -103,4 +103,4 @@ Copyright (C) 2022 Timofey Chuchkanov
     <LoadingIndicator />
 {/if}
 
-<Footer appVersion="2.0 Domestic Dante (alpha3)" />
+<Footer appVersion="2.0 Domestic Dante (alpha4)" />
