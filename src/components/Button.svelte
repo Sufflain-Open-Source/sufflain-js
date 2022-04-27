@@ -3,6 +3,7 @@
     export let onClick;
     export let text;
     export let imagePath;
+    export let alt = "";
 </script>
 
 <button
@@ -10,7 +11,7 @@
     on:click|preventDefault={onClick}
 >
     {#if imagePath}
-        <img alt="telegram logo" src={imagePath} />
+        <img {alt} src={imagePath} />
     {/if}
 
     {#if text}
@@ -35,7 +36,7 @@
         color: var(--dark-red);
         background-color: var(--dark-blue);
         border-radius: 1rem;
-        box-shadow: 0px 1px 16px rgba(0, 0, 0, .3);
+        box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.3);
     }
 
     button.mainButton {

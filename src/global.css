@@ -8,8 +8,8 @@
     --medium-blue: #c6f5fe;
     --dark-blue: #84cfff;
     --default-shadow: 0px 1px 4px rgba(0, 0, 0, .3);
-  
-    --nav-bar-height: 2.8rem;  
+
+    --nav-bar-height: 2.8rem;
 }
 
 * {
@@ -17,7 +17,12 @@
     margin: 0;
 }
 
-html, body {
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -29,11 +34,16 @@ body {
     padding: 0 0 calc(var(--nav-bar-height) * 2) 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     background-color: var(--medium-blue);
 }
 
-select, button {
+body.landing {
+    padding: 0;
+}
+
+select,
+button {
     font-size: inherit;
     font-family: inherit;
 }
@@ -42,8 +52,12 @@ a {
     text-decoration: none;
 }
 
-h2 {
-    font-size: 1.33rem;
+h1.app-title {
+    font-size: 4rem;
+}
+
+h2.section-title {
+    font-size: 2.6rem;
 }
 
 .hoverable-with-gradient {
@@ -61,15 +75,15 @@ h2 {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(17deg, rgba(132,207,255,1) 0%, 
-                                       rgba(135,131,173,1) 25%, 
-                                       rgba(137,80,119,1) 42%, 
-                                       rgba(138,61,99,1) 50%, 
-                                       rgba(139,61,99,1) 52%, 
-                                       rgba(140,61,99,1) 54%, 
-                                       rgba(146,62,99,1) 64%, 
-                                       rgba(182,64,100,1) 77%, 
-                                       rgba(254,68,102,1) 100%);
+    background-image: linear-gradient(17deg, rgba(132, 207, 255, 1) 0%,
+            rgba(135, 131, 173, 1) 25%,
+            rgba(137, 80, 119, 1) 42%,
+            rgba(138, 61, 99, 1) 50%,
+            rgba(139, 61, 99, 1) 52%,
+            rgba(140, 61, 99, 1) 54%,
+            rgba(146, 62, 99, 1) 64%,
+            rgba(182, 64, 100, 1) 77%,
+            rgba(254, 68, 102, 1) 100%);
 }
 
 .error {

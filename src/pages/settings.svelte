@@ -15,6 +15,7 @@ Copyright (C) 2022 Timofey Chuchkanov
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <script>
+    import config from "../../cli-config.js";
     import { UserType } from "../shared/const.js";
     import { fetchGroups, fetchNames } from "../data/remote.js";
     import { getGroup, getName } from "../data/local.js";
@@ -106,4 +107,4 @@ Copyright (C) 2022 Timofey Chuchkanov
     <LoadingIndicator />
 {/if}
 
-<Footer appVersion="2.0 Domestic Dante (alpha4)" />
+<Footer appVersion={config.version} />

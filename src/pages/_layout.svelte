@@ -18,27 +18,26 @@ Copyright (C) 2022 Timofey Chuchkanov
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <script>
-    import { getGroup, getName } from '../data/local.js';
-    import { redirect, route } from '@roxi/routify';
+    import { getGroup, getName } from "../data/local.js";
+    import { redirect, route } from "@roxi/routify";
 
     const group = getGroup();
     const name = getName();
 
     // We need to clean cached page content to prevent from going back to the welcome page if
     // the user has saved the id.
-    window.onpopstate = function () { 
-        if (window.location.pathname == '/welcome') {
-            window.location.replace('/timetables') 
+    window.onpopstate = function () {
+        if (window.location.pathname == "/welcome") {
+            window.location.replace("/timetables");
         }
     };
 
-    if ((name || group) && ($route.shortPath == '/welcome' || window.location.pathname == '/'))
-        $redirect('/timetables');
+    if ((name || group) && $route.shortPath == "/welcome")
+        $redirect("/timetables");
 
-    if (!(name || group) && $route.shortPath != '/welcome')
-        $redirect('/welcome')
+    if (!(name || group) && $route.shortPath != "/welcome")
+        $redirect("/welcome");
 </script>
 
-<slot></slot>
+<slot />
