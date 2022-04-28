@@ -93,6 +93,11 @@
 <Footer appVersion={config.version} />
 
 <style>
+    :root {
+        --logo-width: 9.925rem;
+        --logo-height: 15rem;
+    }
+
     a {
         color: var(--dark-red);
         scroll-behavior: smooth;
@@ -108,8 +113,8 @@
     }
 
     .logo {
-        height: 300px;
-        width: 185.9px;
+        height: var(--logo-height);
+        width: var(--logo-width);
         background-image: url("/img/sufflain-colored-outline.svg");
         background-repeat: no-repeat;
         background-size: contain;
@@ -119,6 +124,7 @@
     #hero p {
         margin-top: 1.3rem;
         margin-bottom: 4rem;
+        text-align: center;
     }
 
     section {
@@ -127,6 +133,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin: 0 1rem 0 1rem;
     }
 
     section:not(:nth-of-type(1)) {
@@ -158,6 +165,7 @@
         justify-content: center;
         align-items: center;
         display: flex;
+        padding: 0 2rem 0 2rem;
         gap: 16rem;
     }
 
@@ -172,6 +180,42 @@
     .section-text {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         gap: 1rem;
+    }
+
+    @media (max-width: 1336px) {
+        #no-manual-search h2 {
+            max-width: 350px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .section-content {
+            flex-direction: column;
+            gap: 4rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #no-manual-search img,
+        #teacher-interface img {
+            order: 2;
+        }
+    }
+
+    @media (max-height: 1024px) and (max-width: 740px) {
+        .logo {
+            width: calc(var(--logo-width) / 2);
+            height: calc(var(--logo-height) / 2);
+        }
+
+        section img {
+            max-width: 50vw;
+        }
+
+        section:last-of-type {
+            padding-bottom: 4rem;
+        }
     }
 </style>
