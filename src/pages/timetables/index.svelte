@@ -113,7 +113,8 @@ Copyright (C) 2022 Timofey Chuchkanov
 
 <div class="fab-container">
     <Button
-        onClick={() => window.open("https://t.me/painsufflain")}
+        isAnchor="true"
+        onClick={"https://t.me/painsufflain"}
         buttonsClass="floating"
         imagePath="img/telegram.svg"
     />

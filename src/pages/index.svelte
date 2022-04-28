@@ -85,8 +85,8 @@
 <section id="contact">
     <h2 class="section-title">Связаться с нами</h2>
     <div class="section-content">
-        <Button buttonsClass="floating" imagePath="/img/envelope-solid.svg" />
-        <Button buttonsClass="floating" imagePath="/img/telegram.svg" />
+        <Button isAnchor=true onClick={ 'mailto:crt0r.9@yahoo.com' } buttonsClass="floating" imagePath="/img/envelope-solid.svg" />
+        <Button isAnchor=true onClick={ 'https://t.me/painsufflain' }  buttonsClass="floating" imagePath="/img/telegram.svg" />
     </div>
 </section>
 
