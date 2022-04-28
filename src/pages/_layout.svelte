@@ -36,8 +36,14 @@ Copyright (C) 2022 Timofey Chuchkanov
     if ((name || group) && $route.shortPath == "/welcome")
         $redirect("/timetables");
 
-    if (!(name || group) && $route.shortPath != "/welcome")
+    if (
+        window.location.pathname != "/" &&
+        !(name || group) &&
+        $route.shortPath != "/welcome"
+    )
         $redirect("/welcome");
+
+    console.log(window.location.pathname);
 </script>
 
 <slot />
