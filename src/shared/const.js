@@ -20,4 +20,9 @@ const UserType = Object.freeze({
     teacher: 2
 });
 
-export { UserType };
+const alert = {
+    title: 'Houston, we have a problem!',
+    msg: 'Адрес нашего сервера с трекером расписаний был заблокирован сайтом колледжа по непонятной причине. За обновлениями следите в канале.'
+}
+
+export { UserType, alert };

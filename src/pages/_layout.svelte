@@ -42,8 +42,6 @@ Copyright (C) 2022 Timofey Chuchkanov
         $route.shortPath != "/welcome"
     )
         $redirect("/welcome");
-
-    console.log(window.location.pathname);
 </script>
 
 <slot />

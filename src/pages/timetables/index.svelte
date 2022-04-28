@@ -27,6 +27,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     import { onMount } from "svelte";
     import { makePageTitle } from "../../util/strings";
 
+    import { showStylizedAlert } from "../../site-misc/alert.js";
+    import { alert } from "../../shared/const";
+
     const title = makePageTitle("Расписание занятий");
 
     let isNothingToShow = false;
@@ -35,6 +38,7 @@ Copyright (C) 2022 Timofey Chuchkanov
 
     onMount(() => {
         dispatchEvent(requestTimetablesEvent);
+        showStylizedAlert(alert.title, alert.msg);
     });
 
     async function fetchAndSetData() {
