@@ -87,7 +87,7 @@
     <div class="section-content">
         <Button
             isAnchor="true"
-            onClick={"mailto:crt0r.9@yahoo.com"}
+            onClick={"mailto:sufflain@mail.ru"}
             buttonsClass="floating"
             imagePath="/img/envelope-solid.svg"
         />
