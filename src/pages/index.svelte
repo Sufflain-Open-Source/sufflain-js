@@ -228,4 +228,14 @@
             padding-bottom: 4rem;
         }
     }
+
+    @media (orientation: landscape) and (max-height: 800px)  and (max-width: 1000px) {
+        section {
+            height: 100vw;
+        }
+
+        section img {
+            max-width: 30vw;
+        }
+    }
 </style>
