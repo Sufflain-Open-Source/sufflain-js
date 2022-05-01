@@ -252,7 +252,7 @@
         }
     }
 
-    @media (max-height: 800px) and (max-width: 1024px) {
+    @media (orientation: landscape) and (max-height: 800px) and (max-width: 1024px) {
         section {
             height: 100vw;
         }
