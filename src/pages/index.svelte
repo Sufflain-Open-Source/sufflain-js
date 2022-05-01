@@ -82,6 +82,20 @@
     </div>
 </section>
 
+<section id="how-it-works">
+    <div class="section-content">
+        <div class="section-text">
+            <h2 class="section-title">Как это работает?</h2>
+            <p>
+                Каждые полчаса трекер расписаний Sufflain проверяет блог КБТ на
+                изменения в расписании.<br /><br />
+                Если они присутствуют - данные кэшируются.
+            </p>
+        </div>
+        <video src="/demo/tracker.mp4" controls />
+    </div>
+</section>
+
 <section id="contact">
     <h2 class="section-title">Связаться с нами</h2>
     <div class="section-content">
@@ -171,6 +185,11 @@
         border-radius: 1.11rem;
     }
 
+    section video {
+        max-width: 40rem;
+        box-shadow: var(--default-shadow);
+    }
+
     .section-content {
         justify-content: center;
         align-items: center;
@@ -224,12 +243,16 @@
             max-width: 50vw;
         }
 
+        section video {
+            max-width: 100%;
+        }
+
         section:last-of-type {
             padding-bottom: 4rem;
         }
     }
 
-    @media (orientation: landscape) and (max-height: 800px)  and (max-width: 1000px) {
+    @media (orientation: landscape) and (max-height: 800px) and (max-width: 1000px) {
         section {
             height: 100vw;
         }
