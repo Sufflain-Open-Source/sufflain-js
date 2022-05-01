@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /timetables
+Disallow: /settings
+Sitemap: http://www.sufflain.icu/sitemap.txt
