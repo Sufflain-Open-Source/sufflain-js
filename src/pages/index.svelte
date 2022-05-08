@@ -96,6 +96,17 @@
     </div>
 </section>
 
+<section id="our-source-code">
+    <div class="section-content">
+        <div class="section-text">
+            <h2 class="section-title">
+                Исходный код
+            </h2>
+            <a href="https://gitlab.com/Sufflain">Наш Gitlab</a>
+        </div>
+    </div>
+</section>
+
 <section id="contact">
     <h2 class="section-title">Связаться с нами</h2>
     <div class="section-content">
@@ -211,6 +222,10 @@
         flex-direction: column;
         justify-content: center;
         gap: 1rem;
+    }
+
+    #our-source-code .section-text a {
+        text-align: center;
     }
 
     @media (max-width: 1336px) {
