@@ -1,4 +1,5 @@
 export default {
+    "version": "",
     "shared": "",
     "paths": {
         "groups": "",
