@@ -92,6 +92,7 @@
                 Если они присутствуют - данные кэшируются.
             </p>
         </div>
+        <!-- svelte-ignore a11y-media-has-caption -->
         <video src="/demo/tracker.mp4" controls />
     </div>
 </section>
