@@ -155,6 +155,6 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     .cards-container {
-        margin-bottom: 20vh;
+        margin-bottom: 40vh;
     }
 </style>
