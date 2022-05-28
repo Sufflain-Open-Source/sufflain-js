@@ -100,9 +100,7 @@
 <section id="our-source-code">
     <div class="section-content">
         <div class="section-text">
-            <h2 class="section-title">
-                Исходный код
-            </h2>
+            <h2 class="section-title">Исходный код</h2>
             <a href="https://gitlab.com/Sufflain">Наш Gitlab</a>
         </div>
     </div>
@@ -124,6 +122,17 @@
             imagePath="/img/telegram.svg"
         />
     </div>
+</section>
+
+<section id="donate">
+    <iframe
+        title="Пожертвовать на оплату аренды сервера и домена"
+        src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D0%BD%D0%B0%20%D0%BE%D0%BF%D0%BB%D0%B0%D1%82%D1%83%20%D0%B0%D1%80%D0%B5%D0%BD%D0%B4%D1%8B%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0%20%D0%B8%20%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%B0&default-sum=102&button-text=14&payment-type-choice=on&successURL=&quickpay=shop&account=410016415874896&"
+        height="254"
+        frameborder="0"
+        allowtransparency="true"
+        scrolling="no"
+    />
 </section>
 
 <Footer appVersion={config.version} />
@@ -277,5 +286,4 @@
             max-width: 30vw;
         }
     }
-
 </style>

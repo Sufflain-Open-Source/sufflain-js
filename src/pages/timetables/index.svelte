@@ -114,6 +114,13 @@ Copyright (C) 2022 Timofey Chuchkanov
 <div class="fab-container">
     <Button
         isAnchor="true"
+        onClick={"/#donate"}
+        buttonsClass="floating"
+        imagePath="img/handshake-angle-solid.svg"
+    />
+
+    <Button
+        isAnchor="true"
         onClick={"https://t.me/painsufflain"}
         buttonsClass="floating"
         imagePath="img/telegram.svg"
@@ -132,6 +139,9 @@ Copyright (C) 2022 Timofey Chuchkanov
     }
 
     .fab-container {
+        flex-direction: column;
+        display: flex;
+        gap: 1.5rem;
         position: fixed;
         bottom: 17vh;
         right: 5vw;
