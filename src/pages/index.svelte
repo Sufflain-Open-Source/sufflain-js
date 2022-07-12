@@ -135,6 +135,12 @@
     />
 </section>
 
+<section id="powered-by">
+    <a href="https://freebsd.org">
+        <img alt="Powered by FreeBSD image" src="https://www.freebsd.org/gifs/powerlogo.gif">
+    </a>
+</section>
+
 <Footer appVersion={config.version} />
 
 <style>
@@ -236,6 +242,14 @@
 
     #our-source-code .section-text a {
         text-align: center;
+    }
+
+    #powered-by {
+        height: 500px;
+    }
+
+    #powered-by img {
+        box-shadow: none;
     }
 
     @media (max-width: 1336px) {
