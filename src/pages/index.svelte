@@ -101,7 +101,8 @@
     <div class="section-content">
         <div class="section-text">
             <h2 class="section-title">Исходный код</h2>
-            <a href="https://gitlab.com/Sufflain">Наш Gitlab</a>
+            <a href="https://github.com/Sufflain-Open-Source">GitHub</a>
+            <a href="https://gitlab.com/Sufflain">GitLab</a>
         </div>
     </div>
 </section>
